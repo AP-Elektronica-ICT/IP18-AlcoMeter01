@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 /**
- * Generated class for the MainPage page.
+ * Generated class for the StatisticsPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -10,25 +10,16 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-main',
-  templateUrl: 'main.html',
+  selector: 'page-statistics',
+  templateUrl: 'statistics.html',
 })
-export class MainPage {
+export class StatisticsPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad MainPage');
+    console.log('ionViewDidLoad StatisticsPage');
   }
-
-
-  public buttonClicked: boolean = false; //Whatever you want to initialise it as
-
-  public onButtonClick() {
-
-      this.buttonClicked = !this.buttonClicked;
-  }
-
 
 }
