@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AuthenticatieProvider} from '../../providers/authenticatie/authenticatie'
+import { FirebaseProvider} from '../../providers/firebase/firebase'
 
 /**
  * Generated class for the TestHomePage page.
@@ -16,7 +17,7 @@ import { AuthenticatieProvider} from '../../providers/authenticatie/authenticati
 })
 export class TestHomePage {
 
-  constructor(private afAuth: AuthenticatieProvider, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private afAuth: AuthenticatieProvider, public navCtrl: NavController, public navParams: NavParams, private fb: FirebaseProvider) {
   }
 
   logout(){
@@ -27,7 +28,8 @@ export class TestHomePage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad TestHomePage');
     this.afAuth.getCurrentuserID();
-  }
+    this.fb.getUserProfile();
+   }
 
 
 }

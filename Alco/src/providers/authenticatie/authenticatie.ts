@@ -28,16 +28,18 @@ export class AuthenticatieProvider {
     return firebase.auth().sendPasswordResetEmail(email);
   }
 
-  getCurrentuserID(){
+  getCurrentuserID(): Promise<any>{
+    var id;
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
-        console.log(user.uid);
-        return user.uid;
+        console.log('userID: ' + user.uid);
+        id = user.uid;
       } else {
         console.log("no user logged in");
-        return null;
+        id = null;
       }
     });
+    return id;
     }
   }
 
