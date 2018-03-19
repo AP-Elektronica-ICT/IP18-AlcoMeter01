@@ -11,8 +11,6 @@ export class FirebaseProvider {
     var user =  this.afd.object('/userProfile/'+id);
     console.log('Userprofile: ' + user);
     return user;
-
-
   }
  
   addUser(email) {

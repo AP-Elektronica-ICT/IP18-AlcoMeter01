@@ -16,7 +16,10 @@ export class AuthenticatieProvider {
     return firebase
     .auth().createUserWithEmailAndPassword(email, password)
     .then( newUser => {
-      firebase.database().ref('/userProfile').child(newUser.uid).set({ email: email, country:country, dateOfBirth:dateOfBirth});
+      firebase.database().ref('/userProfile').child(newUser.uid).set({ email: email, country:country, dateOfBirth:dateOfBirth})
+      .catch(function(error){
+        console.log("Error creating new user: ", error);
+      });
     });
   }
 
@@ -41,5 +44,15 @@ export class AuthenticatieProvider {
     });
     return id;
     }
+
+    /*admin.auth().getUser(uid)
+    .then(function(userRecord) {
+      // See the UserRecord reference doc for the contents of userRecord.
+      console.log("Successfully fetched user data:", userRecord.toJSON());
+    })
+    .catch(function(error) {
+      console.log("Error fetching user data:", error);
+    });*/
+
   }
 
