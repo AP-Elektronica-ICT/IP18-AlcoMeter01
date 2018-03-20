@@ -82,4 +82,5 @@
     <plugin name="cordova-plugin-ionic-webview" spec="^1.1.16" />
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5" />
     <plugin name="cordova-plugin-bluetooth-serial" spec="^0.4.7" />
+    <allow-navigation href="http://192.168.0.185:8100" />
 </widget>

@@ -58,74 +58,18 @@ var HomePage = (function () {
     function HomePage(bluetoothSerial, alertCtrl) {
         this.bluetoothSerial = bluetoothSerial;
         this.alertCtrl = alertCtrl;
-        this.success = function (data) { return alert(data); };
-        this.fail = function (error) { return alert(error); };
-        bluetoothSerial.enable();
+        this.macAddress = "98:D3:31:FD:2A:CC";
     }
     HomePage.prototype.startScanning = function () {
-        var _this = this;
-        this.pairedDevices = null;
-        this.unpairedDevices = null;
-        this.gettingDevices = true;
-        this.bluetoothSerial.discoverUnpaired().then(function (success) {
-            _this.unpairedDevices = success;
-            _this.gettingDevices = false;
-            success.forEach(function (element) {
-                // alert(element.name);
-            });
-        }, function (err) {
-            console.log(err);
-        });
-        this.bluetoothSerial.list().then(function (success) {
-            _this.pairedDevices = success;
-        }, function (err) {
-        });
-    };
-    HomePage.prototype.selectDevice = function (address) {
-        var _this = this;
-        var alert = this.alertCtrl.create({
-            title: 'Connect',
-            message: 'Do you want to connect with?',
-            buttons: [
-                {
-                    text: 'Cancel',
-                    role: 'cancel',
-                    handler: function () {
-                        console.log('Cancel clicked');
-                    }
-                },
-                {
-                    text: 'Connect',
-                    handler: function () {
-                        _this.bluetoothSerial.connect(address).subscribe(_this.success, _this.fail);
-                    }
-                }
-            ]
-        });
-        alert.present();
-    };
-    HomePage.prototype.disconnect = function () {
-        var _this = this;
-        var alert = this.alertCtrl.create({
-            title: 'Disconnect?',
-            message: 'Do you want to Disconnect?',
-            buttons: [
-                {
-                    text: 'Cancel',
-                    role: 'cancel',
-                    handler: function () {
-                        console.log('Cancel clicked');
-                    }
-                },
-                {
-                    text: 'Disconnect',
-                    handler: function () {
-                        _this.bluetoothSerial.disconnect();
-                    }
-                }
-            ]
-        });
-        alert.present();
+        this.bluetoothSerial.connect(this.macAddress);
+        if (this.bluetoothSerial.isConnected()) {
+            console.log("connected");
+            var message = this.bluetoothSerial.subscribe("\n");
+            console.log(message);
+        }
+        else {
+            console.log("not connected");
+        }
     };
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({

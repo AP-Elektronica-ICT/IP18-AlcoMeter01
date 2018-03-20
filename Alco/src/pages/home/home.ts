@@ -10,83 +10,23 @@ import { AlertController } from 'ionic-angular';
 
 export class HomePage {
 
-  unpairedDevices: any;
-  pairedDevices: any;
-  gettingDevices: Boolean;
-  constructor(private bluetoothSerial: BluetoothSerial, private alertCtrl: AlertController) {
-    bluetoothSerial.enable();
+  private macAddress = "98:D3:31:FD:2A:CC";
+  constructor(public bluetoothSerial: BluetoothSerial, private alertCtrl: AlertController) {
+   
   }
+ 
+  public startScanning(){
+    this.bluetoothSerial.connect(
+      this.macAddress
+    );
 
-  startScanning() {
-    this.pairedDevices = null;
-    this.unpairedDevices = null;
-    this.gettingDevices = true;
-    this.bluetoothSerial.discoverUnpaired().then((success) => {
-      this.unpairedDevices = success;
-      this.gettingDevices = false;
-      success.forEach(element => {
-        // alert(element.name);
-      });
-    },
-      (err) => {
-        console.log(err);
-      })
-
-    this.bluetoothSerial.list().then((success) => {
-      this.pairedDevices = success;
-    },
-      (err) => {
-
-      })
-  }
-  success = (data) => alert(data);
-  fail = (error) => alert(error);
-
-  selectDevice(address: any) {
-
-    let alert = this.alertCtrl.create({
-      title: 'Connect',
-      message: 'Do you want to connect with?',
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
-          }
-        },
-        {
-          text: 'Connect',
-          handler: () => {
-            this.bluetoothSerial.connect(address).subscribe(this.success, this.fail);
-          }
-        }
-      ]
-    });
-    alert.present();
-
-  }
-
-  disconnect() {
-    let alert = this.alertCtrl.create({
-      title: 'Disconnect?',
-      message: 'Do you want to Disconnect?',
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
-          }
-        },
-        {
-          text: 'Disconnect',
-          handler: () => {
-            this.bluetoothSerial.disconnect();
-          }
-        }
-      ]
-    });
-    alert.present();
+    if(this.bluetoothSerial.isConnected()){
+      console.log("connected");
+      var message = this.bluetoothSerial.subscribe("\n");
+      console.log(message);
+    }
+    else{
+      console.log("not connected");
+    }
   }
 }
