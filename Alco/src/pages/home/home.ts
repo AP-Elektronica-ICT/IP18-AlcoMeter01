@@ -26,11 +26,19 @@ export class HomePage {
   });
   }
  
-  public startScanning(){
+  public connectMAC(mac: String){
     this.bluetoothSerial.connect(this.macAddress).subscribe((rspo)=>{
       console.log("connected to HC-06 device", rspo);
     }, (error) => {
       console.log("error", error);
     })
-  }  
+  }
+  
+  public startScanning(){
+    this.bluetoothSerial.discoverUnpaired();
+    this.bluetoothSerial.setDeviceDiscoveredListener().forEach(
+      device => {
+        console.log(device.id); this.connectMAC(device.id);
+  });
+  }
 }

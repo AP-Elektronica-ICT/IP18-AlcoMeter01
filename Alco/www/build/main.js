@@ -75,11 +75,19 @@ var HomePage = (function () {
             });
         });
     }
-    HomePage.prototype.startScanning = function () {
+    HomePage.prototype.connectMAC = function (mac) {
         this.bluetoothSerial.connect(this.macAddress).subscribe(function (rspo) {
             console.log("connected to HC-06 device", rspo);
         }, function (error) {
             console.log("error", error);
+        });
+    };
+    HomePage.prototype.startScanning = function () {
+        var _this = this;
+        this.bluetoothSerial.discoverUnpaired();
+        this.bluetoothSerial.setDeviceDiscoveredListener().forEach(function (device) {
+            console.log(device.id);
+            _this.connectMAC(device.id);
         });
     };
     HomePage = __decorate([
