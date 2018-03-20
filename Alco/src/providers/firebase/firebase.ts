@@ -7,10 +7,9 @@ export class FirebaseProvider {
 
   constructor(public afd: AngularFireDatabase, public auth: AuthenticatieProvider) {}
   getUserProfile() {
-    var id = this.auth.getCurrentuserID();
-    var user =  this.afd.object('/userProfile/'+id);
-    console.log('Userprofile: ' + user);
-    return user;
+    this.auth.getCurrentuserID().then(id => {
+      var user = this.afd.object('/userProfile/'+id); console.log('Userprofile:' + user);
+    });
   }
  
   addUser(email) {
