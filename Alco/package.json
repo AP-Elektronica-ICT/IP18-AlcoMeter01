@@ -53,11 +53,8 @@
   "description": "An Ionic project",
   "cordova": {
     "plugins": {
-<<<<<<< HEAD
       "cordova-plugin-bluetooth-serial": {},
-      "cordova-plugin-android-permissions": {}
-    }
-=======
+      "cordova-plugin-android-permissions": {},
       "cordova-plugin-whitelist": {},
       "cordova-plugin-device": {},
       "cordova-plugin-splashscreen": {},
@@ -67,6 +64,5 @@
     "platforms": [
       "android"
     ]
->>>>>>> master
   }
 }

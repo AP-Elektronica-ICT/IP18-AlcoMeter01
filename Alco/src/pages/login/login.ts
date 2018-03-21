@@ -4,6 +4,7 @@ import { User } from '../../models/user';
 import {AngularFireAuth} from 'angularfire2/auth';
 import {CreateAccountPage } from './../create-account/create-account';
 import {ResetPasswordPage} from './../reset-password/reset-password';
+import { SettingsPage } from './../settings/settings';
 /**
  * Generated class for the LoginPage page.
  *
@@ -29,7 +30,7 @@ export class LoginPage {
    try {
     const result = this.afAuth.auth.signInWithEmailAndPassword(user.email, user.password);
     if(result){
-      this.navCtrl.push('TestHomePage');
+      this.navCtrl.push(SettingsPage);
     }
    } 
    catch(e){

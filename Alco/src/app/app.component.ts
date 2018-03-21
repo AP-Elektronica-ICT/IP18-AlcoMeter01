@@ -12,9 +12,6 @@ import { SettingsPage } from "../pages/settings/settings";
 import { StatisticsPage } from "../pages/statistics/statistics";
 import { PersonalInfoPage } from "../pages/personal-info/personal-info";
 
-<<<<<<< HEAD
-import { HomePage } from '../pages/home/home';
-=======
 
 
 
@@ -26,7 +23,6 @@ const firebaseConfig = {
   storageBucket: "alcometer-720c2.appspot.com",
   messagingSenderId: "211742343446"
 };
->>>>>>> master
 
 @Component({
   templateUrl: 'app.html'
@@ -42,9 +38,6 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-<<<<<<< HEAD
-      { title: 'Home', component: HomePage }
-=======
       { title: 'Login', component: LoginPage },
       { title: 'Create Account', component: CreateAccountPage },
       { title: 'PersonalInfo', component: PersonalInfoPage },
@@ -52,15 +45,13 @@ export class MyApp {
       { title: 'Settings', component: SettingsPage },
       { title: 'Statistics', component: StatisticsPage }
 
-
->>>>>>> master
     ];
     const unsubscribe = firebase.auth().onAuthStateChanged( user => {
       if (!user) {
         this.rootPage = 'LoginPage';
         unsubscribe();
       } else { 
-        this.rootPage = TestHomePage;
+        this.rootPage = SettingsPage;
         unsubscribe();
       }
     });
