@@ -3,6 +3,8 @@ import { NavController } from 'ionic-angular';
 import { BluetoothSerial } from '@ionic-native/bluetooth-serial';
 import { AlertController } from 'ionic-angular';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
+import { User } from '../../models/user';
+import {AngularFireAuthModule, AngularFireAuth} from 'angularfire2/auth';
 
 @Component({
   selector: 'page-home',

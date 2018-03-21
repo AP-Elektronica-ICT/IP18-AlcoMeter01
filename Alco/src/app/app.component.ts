@@ -2,8 +2,31 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import firebase from 'firebase';
+import { LoginPage } from '../pages/login/login';
+import { CreateAccountPage } from '../pages/create-account/create-account';
+import { TestHomePage } from '../pages/test-home/test-home';
+import { ResetPasswordPage } from "../pages/reset-password/reset-password";
+import { MainPage} from "../pages/main/main";
+import { SettingsPage } from "../pages/settings/settings";
+import { StatisticsPage } from "../pages/statistics/statistics";
+import { PersonalInfoPage } from "../pages/personal-info/personal-info";
 
+<<<<<<< HEAD
 import { HomePage } from '../pages/home/home';
+=======
+
+
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCGbCzagTiX3RZmGXYct2YaJSZQPMcziac",
+  authDomain: "alcometer-720c2.firebaseapp.com",
+  databaseURL: "https://alcometer-720c2.firebaseio.com",
+  projectId: "alcometer-720c2",
+  storageBucket: "alcometer-720c2.appspot.com",
+  messagingSenderId: "211742343446"
+};
+>>>>>>> master
 
 @Component({
   templateUrl: 'app.html'
@@ -11,17 +34,36 @@ import { HomePage } from '../pages/home/home';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;
+  rootPage: any;
 
   pages: Array<{title: string, component: any}>;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
-    this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
+<<<<<<< HEAD
       { title: 'Home', component: HomePage }
+=======
+      { title: 'Login', component: LoginPage },
+      { title: 'Create Account', component: CreateAccountPage },
+      { title: 'PersonalInfo', component: PersonalInfoPage },
+      { title: 'Main', component: MainPage },
+      { title: 'Settings', component: SettingsPage },
+      { title: 'Statistics', component: StatisticsPage }
+
+
+>>>>>>> master
     ];
+    const unsubscribe = firebase.auth().onAuthStateChanged( user => {
+      if (!user) {
+        this.rootPage = 'LoginPage';
+        unsubscribe();
+      } else { 
+        this.rootPage = TestHomePage;
+        unsubscribe();
+      }
+    });
 
   }
 
