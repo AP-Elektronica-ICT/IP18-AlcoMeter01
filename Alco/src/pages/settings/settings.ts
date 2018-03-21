@@ -16,9 +16,10 @@ import { AlertController } from 'ionic-angular';
 export class SettingsPage {
 
   permissions: any[] = ["BLUETOOTH", "BLUETOOTH_ADMIN", "BLUETOOTH_PRIVILEGED"];
-  public Devices: any[];
+  public pairedDevices: any[] = [];
   public availableDevices: any[] = [];
-  private macAddress = "98:D3:31:FD:2A:CC";
+  //private macAddress = "98:D3:31:FD:2A:CC";
+  private numberPairedDevices = 0;
 
   constructor(public bluetoothSerial: BluetoothSerial, public navCtrl: NavController, public navParams: NavParams, private androidPermissions: AndroidPermissions, private alertCtrl: AlertController) {
       this.bluetoothSerial.isEnabled().then(() => {
@@ -33,8 +34,8 @@ export class SettingsPage {
     });
   }
    
-    public connectMAC(mac: String){
-      this.bluetoothSerial.connect(this.macAddress).subscribe((rspo)=>{
+    public connectMAC(mac: string){
+      this.bluetoothSerial.connect(mac).subscribe((rspo)=>{
         console.log("connected to HC-06 device", rspo);
       }, (error) => {
         console.log("error", error);
@@ -42,14 +43,12 @@ export class SettingsPage {
     }
     
     public startScanning(){
-      //this.availableDevices= [];
       var i = 0;
       this.bluetoothSerial.setDeviceDiscoveredListener().forEach(
         device => {
           console.log(device.id);
           this.availableDevices[i] = device;
           console.log("unpaired devices: " + this.availableDevices[i].name);
-          //this.connectMAC(device.id);
           i++;
     });
       this.bluetoothSerial.discoverUnpaired();
@@ -57,7 +56,7 @@ export class SettingsPage {
 
 
   
-    selectDevice(address: any) {
+    selectDevice(device: any) {
   
       let alert = this.alertCtrl.create({
         title: 'Connect',
@@ -73,13 +72,14 @@ export class SettingsPage {
           {
             text: 'Connect',
             handler: () => {
-              this.connectMAC(address);
+              this.connectMAC(device.id);
+              this.pairedDevices[this.numberPairedDevices] = device;
+              this.numberPairedDevices++;
             }
           }
         ]
       });
       alert.present();
-  
     }
   
     disconnect() {

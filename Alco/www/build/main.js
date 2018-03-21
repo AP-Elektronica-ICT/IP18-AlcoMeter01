@@ -999,8 +999,10 @@ var SettingsPage = (function () {
         this.androidPermissions = androidPermissions;
         this.alertCtrl = alertCtrl;
         this.permissions = ["BLUETOOTH", "BLUETOOTH_ADMIN", "BLUETOOTH_PRIVILEGED"];
+        this.pairedDevices = [];
         this.availableDevices = [];
-        this.macAddress = "98:D3:31:FD:2A:CC";
+        //private macAddress = "98:D3:31:FD:2A:CC";
+        this.numberPairedDevices = 0;
         this.bluetoothSerial.isEnabled().then(function () {
             console.log('hurray it bluetooth is on');
         }, function (error) {
@@ -1013,7 +1015,7 @@ var SettingsPage = (function () {
         });
     }
     SettingsPage.prototype.connectMAC = function (mac) {
-        this.bluetoothSerial.connect(this.macAddress).subscribe(function (rspo) {
+        this.bluetoothSerial.connect(mac).subscribe(function (rspo) {
             console.log("connected to HC-06 device", rspo);
         }, function (error) {
             console.log("error", error);
@@ -1021,18 +1023,16 @@ var SettingsPage = (function () {
     };
     SettingsPage.prototype.startScanning = function () {
         var _this = this;
-        //this.availableDevices= [];
         var i = 0;
         this.bluetoothSerial.setDeviceDiscoveredListener().forEach(function (device) {
             console.log(device.id);
             _this.availableDevices[i] = device;
             console.log("unpaired devices: " + _this.availableDevices[i].name);
-            //this.connectMAC(device.id);
             i++;
         });
         this.bluetoothSerial.discoverUnpaired();
     };
-    SettingsPage.prototype.selectDevice = function (address) {
+    SettingsPage.prototype.selectDevice = function (device) {
         var _this = this;
         var alert = this.alertCtrl.create({
             title: 'Connect',
@@ -1048,7 +1048,9 @@ var SettingsPage = (function () {
                 {
                     text: 'Connect',
                     handler: function () {
-                        _this.connectMAC(address);
+                        _this.connectMAC(device.id);
+                        _this.pairedDevices[_this.numberPairedDevices] = device;
+                        _this.numberPairedDevices++;
                     }
                 }
             ]
@@ -1080,7 +1082,7 @@ var SettingsPage = (function () {
     };
     SettingsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-settings',template:/*ion-inline-start:"C:\EA2017-2018\InternationalProject\IP18-AlcoMeter01\Alco\src\pages\settings\settings.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>Settings</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n\n\n  <ion-list padding>\n\n    <button ion-button block (click)="startScanning()">scan</button>\n\n    <ion-list-header>\n\n      Paired Devices\n\n    </ion-list-header>\n\n    <ion-item *ngFor="let device of PairedDevices">\n\n      {{device.id}}\n\n    </ion-item>\n\n    <button ion-button block (click)="disconnect()">Disconnect</button>\n\n    <ion-list-header>\n\n      availlable Devices\n\n    </ion-list-header>\n\n    <ion-item *ngFor=\'let device of availableDevices\'>\n\n      <span (click)="selectDevice(device.id)">\n\n        {{device.name}}\n\n      </span>\n\n    </ion-item>\n\n    <ion-spinner name="crescent" *ngIf="gettingDevices"></ion-spinner>\n\n  </ion-list>\n\n  \n\n  \n\n</ion-content>\n\n'/*ion-inline-end:"C:\EA2017-2018\InternationalProject\IP18-AlcoMeter01\Alco\src\pages\settings\settings.html"*/,
+            selector: 'page-settings',template:/*ion-inline-start:"C:\EA2017-2018\InternationalProject\IP18-AlcoMeter01\Alco\src\pages\settings\settings.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>Settings</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n\n\n  <ion-list padding>\n\n    <button ion-button block (click)="startScanning()">scan</button>\n\n    <ion-list-header>\n\n      Paired Devices\n\n    </ion-list-header>\n\n    <ion-item *ngFor="let device of pairedDevices">\n\n      {{device.name}}\n\n    </ion-item>\n\n    <button ion-button block (click)="disconnect()">Disconnect</button>\n\n    <ion-list-header>\n\n      availlable Devices\n\n    </ion-list-header>\n\n    <ion-item *ngFor=\'let device of availableDevices\'>\n\n      <span (click)="selectDevice(device)">\n\n        {{device.name}}\n\n      </span>\n\n    </ion-item>\n\n    <ion-spinner name="crescent" *ngIf="gettingDevices"></ion-spinner>\n\n  </ion-list>\n\n  \n\n  \n\n</ion-content>\n\n'/*ion-inline-end:"C:\EA2017-2018\InternationalProject\IP18-AlcoMeter01\Alco\src\pages\settings\settings.html"*/,
         }),
         __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_native_bluetooth_serial__["a" /* BluetoothSerial */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_native_bluetooth_serial__["a" /* BluetoothSerial */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_native_android_permissions__["a" /* AndroidPermissions */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_native_android_permissions__["a" /* AndroidPermissions */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _e || Object])
     ], SettingsPage);
