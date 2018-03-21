@@ -16,8 +16,8 @@
     <ion-list-header>
       Paired Devices
     </ion-list-header>
-    <ion-item *ngFor="let device of pairedDevices">
-      {{device.name}}
+    <ion-item *ngIf="pairedDevice">
+      {{pairedDevice.name}}
     </ion-item>
     <button ion-button block (click)="disconnect()">Disconnect</button>
     <ion-list-header>
@@ -28,7 +28,7 @@
         {{device.name}}
       </span>
     </ion-item>
-    <ion-spinner name="crescent" *ngIf="gettingDevices"></ion-spinner>
+    <ion-spinner name="crescent" *ngIf="scanning"></ion-spinner>
   </ion-list>
   
   

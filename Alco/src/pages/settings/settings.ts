@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, transition } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { BluetoothSerial } from '@ionic-native/bluetooth-serial';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
@@ -16,10 +16,10 @@ import { AlertController } from 'ionic-angular';
 export class SettingsPage {
 
   permissions: any[] = ["BLUETOOTH", "BLUETOOTH_ADMIN", "BLUETOOTH_PRIVILEGED"];
-  public pairedDevices: any[] = [];
+  public pairedDevice: any;
   public availableDevices: any[] = [];
-  //private macAddress = "98:D3:31:FD:2A:CC";
-  private numberPairedDevices = 0;
+  public scanning: Boolean;
+  //private macAddress = "98:D3:31:FD:2A:CC"; mac adres van bluetoothmodule van Elke
 
   constructor(public bluetoothSerial: BluetoothSerial, public navCtrl: NavController, public navParams: NavParams, private androidPermissions: AndroidPermissions, private alertCtrl: AlertController) {
       this.bluetoothSerial.isEnabled().then(() => {
@@ -43,6 +43,7 @@ export class SettingsPage {
     }
     
     public startScanning(){
+      this.scanning = true;
       var i = 0;
       this.bluetoothSerial.setDeviceDiscoveredListener().forEach(
         device => {
@@ -52,6 +53,7 @@ export class SettingsPage {
           i++;
     });
       this.bluetoothSerial.discoverUnpaired();
+      
     }
 
 
@@ -72,9 +74,15 @@ export class SettingsPage {
           {
             text: 'Connect',
             handler: () => {
+              if(this.pairedDevice != null){
+                if(device.id == this.pairedDevice.id) {
+                  this.bluetoothSerial.disconnect();
+                }
+              }
+              
               this.connectMAC(device.id);
-              this.pairedDevices[this.numberPairedDevices] = device;
-              this.numberPairedDevices++;
+              this.pairedDevice = device;
+              
             }
           }
         ]
@@ -98,6 +106,7 @@ export class SettingsPage {
             text: 'Disconnect',
             handler: () => {
               this.bluetoothSerial.disconnect();
+              this.pairedDevice = null;
             }
           }
         ]
