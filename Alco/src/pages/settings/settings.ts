@@ -19,6 +19,7 @@ export class SettingsPage {
   public pairedDevice: any;
   public availableDevices: any[] = [];
   public scanning: Boolean;
+  public meting: any;
   //private macAddress = "98:D3:31:FD:2A:CC"; mac adres van bluetoothmodule van Elke
 
   constructor(public bluetoothSerial: BluetoothSerial, public navCtrl: NavController, public navParams: NavParams, private androidPermissions: AndroidPermissions, private alertCtrl: AlertController) {
@@ -112,6 +113,10 @@ export class SettingsPage {
         ]
       });
       alert.present();
+    }
+
+    public receiveData(){
+      this.bluetoothSerial.readUntil(";").then(data => {this.meting = data; console.log(data);});
     }
   }
 

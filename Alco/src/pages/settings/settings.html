@@ -29,6 +29,8 @@
       </span>
     </ion-item>
     <ion-spinner name="crescent" *ngIf="scanning"></ion-spinner>
+    <button ion-button block (click)="receiveData()">Receive</button>
+    <ion-item *ngIf = 'meting'>{{meting}}</ion-item>
   </ion-list>
   
   
