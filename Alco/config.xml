@@ -3,7 +3,7 @@
     <name>Alcometer</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://192.168.0.243:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -85,6 +85,6 @@
     <plugin name="cordova-plugin-bluetooth-serial" spec="^0.4.7" />
     <plugin name="cordova-plugin-android-permissions" spec="^1.0.0" />
     <allow-navigation href="http://192.168.56.1:8100" />
-    <engine name="android" spec="^7.0.0" />
     <allow-navigation href="http://192.168.0.243:8100" />
+    <engine name="android" spec="^7.0.0" />
 </widget>
