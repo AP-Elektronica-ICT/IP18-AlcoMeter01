@@ -23,6 +23,7 @@ import { MainPage} from "../pages/main/main";
 import { SettingsPage } from "../pages/settings/settings";
 import { StatisticsPage } from "../pages/statistics/statistics";
 import { PersonalInfoPage } from "../pages/personal-info/personal-info";
+import { MainPageModule } from '../pages/main/main.module';
 
 const firebaseConfig = {
   apiKey: "AIzaSyCGbCzagTiX3RZmGXYct2YaJSZQPMcziac",
@@ -38,7 +39,6 @@ firebase.initializeApp(firebaseConfig);
   declarations: [
     MyApp,
     CreateAccountPage,
-    MainPage,
     SettingsPage,
     StatisticsPage,
     PersonalInfoPage
@@ -56,7 +56,8 @@ firebase.initializeApp(firebaseConfig);
     HttpModule,
     AngularFireDatabaseModule,
     TestHomePageModule,
-    ResetPasswordPageModule
+    ResetPasswordPageModule,
+    MainPageModule
 
   ],
   bootstrap: [IonicApp],
