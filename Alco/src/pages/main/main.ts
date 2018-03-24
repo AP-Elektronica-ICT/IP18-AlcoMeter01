@@ -22,4 +22,13 @@ export class MainPage {
     console.log('ionViewDidLoad MainPage');
   }
 
+
+  public buttonClicked: boolean = false; //Whatever you want to initialise it as
+
+  public onButtonClick() {
+
+      this.buttonClicked = !this.buttonClicked;
+  }
+
+
 }

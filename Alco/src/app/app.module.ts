@@ -28,6 +28,8 @@ import { StatisticsPage } from "../pages/statistics/statistics";
 import { PersonalInfoPage } from "../pages/personal-info/personal-info";
 import { BluetoothProvider } from '../providers/bluetooth/bluetooth';
 
+import { MainPageModule } from '../pages/main/main.module';
+
 const firebaseConfig = {
   apiKey: "AIzaSyCGbCzagTiX3RZmGXYct2YaJSZQPMcziac",
   authDomain: "alcometer-720c2.firebaseapp.com",
@@ -45,7 +47,6 @@ firebase.initializeApp(firebaseConfig);
   declarations: [
     MyApp,
     CreateAccountPage,
-    MainPage,
     SettingsPage,
     StatisticsPage,
     CallPage
@@ -62,7 +63,8 @@ firebase.initializeApp(firebaseConfig);
     HttpModule,
     AngularFireDatabaseModule,
     TestHomePageModule,
-    ResetPasswordPageModule
+    ResetPasswordPageModule,
+    MainPageModule
 
   ],
   bootstrap: [IonicApp],
