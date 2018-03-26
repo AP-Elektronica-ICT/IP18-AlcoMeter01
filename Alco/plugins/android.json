@@ -27,6 +27,9 @@
     },
     "cordova-plugin-android-permissions": {
       "PACKAGE_NAME": "io.ionic.starter"
+    },
+    "call-number": {
+      "PACKAGE_NAME": "be.whateverworks.alcometer"
     }
   },
   "dependent_plugins": {}

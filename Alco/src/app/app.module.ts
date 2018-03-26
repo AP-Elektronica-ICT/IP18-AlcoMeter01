@@ -29,6 +29,7 @@ import { PersonalInfoPage } from "../pages/personal-info/personal-info";
 import { BluetoothProvider } from '../providers/bluetooth/bluetooth';
 
 import { MainPageModule } from '../pages/main/main.module';
+import { PersonalInfoPageModule } from '../pages/personal-info/personal-info.module';
 
 const firebaseConfig = {
   apiKey: "AIzaSyCGbCzagTiX3RZmGXYct2YaJSZQPMcziac",
@@ -64,7 +65,8 @@ firebase.initializeApp(firebaseConfig);
     AngularFireDatabaseModule,
     TestHomePageModule,
     ResetPasswordPageModule,
-    MainPageModule
+    MainPageModule,
+    PersonalInfoPageModule
 
   ],
   bootstrap: [IonicApp],

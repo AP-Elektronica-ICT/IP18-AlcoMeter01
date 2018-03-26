@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController } from 'ionic-angular';
 import { User } from '../../models/user';
 import {AngularFireAuth} from 'angularfire2/auth';
 import {CreateAccountPage } from './../create-account/create-account';
 import {ResetPasswordPage} from './../reset-password/reset-password';
 import { SettingsPage } from './../settings/settings';
+import { MainPage } from '../main/main';
 /**
  * Generated class for the LoginPage page.
  *
@@ -20,7 +21,7 @@ import { SettingsPage } from './../settings/settings';
 export class LoginPage {
 
   user = {} as User;
-  constructor(private afAuth: AngularFireAuth, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private afAuth: AngularFireAuth, public navCtrl: NavController) {
   }
 
   ionViewDidLoad() {
@@ -30,7 +31,7 @@ export class LoginPage {
    try {
     const result = this.afAuth.auth.signInWithEmailAndPassword(user.email, user.password);
     if(result){
-      this.navCtrl.push(SettingsPage);
+      this.navCtrl.push(MainPage);
     }
    } 
    catch(e){
