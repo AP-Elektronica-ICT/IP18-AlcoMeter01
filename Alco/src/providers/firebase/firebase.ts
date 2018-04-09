@@ -10,11 +10,19 @@ export class FirebaseProvider {
 
   constructor(public afd: AngularFireDatabase, public auth: AuthenticatieProvider) {}
   getUserProfile() {
-    var profile = [];
+    var arr = [];
+    var profile = {
+      "country": String,
+      "dateOfBirth": Date,
+      "email": String
+    }
     var id = this.auth.getCurrentuserID();
     console.log("userId in firebaseProvider: ", id);
     this.afd.database.ref(`/userProfile/${id}/`).on('value', resp =>{
-      profile = snapshotToArray(resp);
+      arr = snapshotToArray(resp);
+      profile.country=arr[0];
+      profile.dateOfBirth=arr[1];
+      profile.email=arr[2];
       console.log("profile in provider: ", profile);
     });
     return profile;
