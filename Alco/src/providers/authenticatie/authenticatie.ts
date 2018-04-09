@@ -1,20 +1,23 @@
 import { Injectable } from '@angular/core';
 import  firebase  from 'firebase';
+import {AngularFireAuth} from 'angularfire2/auth';
 
 @Injectable()
 export class AuthenticatieProvider {
 
-  constructor() {
+userId: string;
+
+  constructor(private angularfire: AngularFireAuth) {
 
   }
 
   LoginUser(email: string, password: string): Promise<any>{
-    return firebase.auth().signInWithEmailAndPassword(email, password);
+    return this.angularfire.auth.signInWithEmailAndPassword(email, password);
   }
 
   CreateNewUser(email: string, password: string, country:String, dateOfBirth:Date): Promise<any> {
-    return firebase
-    .auth().createUserWithEmailAndPassword(email, password)
+    return this.angularfire
+    .auth.createUserWithEmailAndPassword(email, password)
     .then( newUser => {
       firebase.database().ref('/userProfile').child(newUser.uid).set({ email: email, country:country, dateOfBirth:dateOfBirth})
       .catch(function(error){
@@ -24,34 +27,23 @@ export class AuthenticatieProvider {
   }
 
   logOut(): Promise<any>{
-    return firebase.auth().signOut();
+    return this.angularfire.auth.signOut();
   }
 
   resetPassword(email: string): Promise<any>{
-    return firebase.auth().sendPasswordResetEmail(email);
+    return this.angularfire.auth.sendPasswordResetEmail(email);
   }
 
-  getCurrentuserID(): any{
-    var id;
-    return firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        console.log('userID: ' + user.uid);
-         return id = user.uid;
-      } else {
-        console.log("no user logged in");
-        return id = null;
-      }
+  getCurrentuserID(){
+    
+    this.angularfire.authState.subscribe(user => {
+      if(user) this.userId = user.uid;
+      else this.userId = null;
+      console.log("userId in authProvider: ", this.userId);
     });
+    return this.userId;
     }
 
-    /*admin.auth().getUser(uid)
-    .then(function(userRecord) {
-      // See the UserRecord reference doc for the contents of userRecord.
-      console.log("Successfully fetched user data:", userRecord.toJSON());
-    })
-    .catch(function(error) {
-      console.log("Error fetching user data:", error);
-    });*/
-
+   
   }
 

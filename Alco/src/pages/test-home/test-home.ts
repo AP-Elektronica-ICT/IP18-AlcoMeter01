@@ -27,8 +27,8 @@ export class TestHomePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TestHomePage');
-    this.afAuth.getCurrentuserID();
-    this.fb.getUserProfile();
+    console.log('Userprofile: ', this.fb.getUserProfile());
+
    }
 
 
