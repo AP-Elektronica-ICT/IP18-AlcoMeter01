@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AuthenticatieProvider} from '../../providers/authenticatie/authenticatie'
 import { FirebaseProvider} from '../../providers/firebase/firebase'
 
+
 /**
  * Generated class for the TestHomePage page.
  *
@@ -27,7 +28,7 @@ export class TestHomePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TestHomePage');
-    console.log('Userprofile: ', this.fb.getUserProfile());
+    console.log("profile in homepage: ", this.fb.getUserProfile());
 
    }
 
