@@ -20,7 +20,7 @@ export class CallPage {
   }
 
   public Emergency() {
-  this.Noodnummer.callNumber("0483445367", true)
+  this.Noodnummer.callNumber("0495142810", true)
   .then(() => console.log('Launched dialer!'))
   .catch(() => console.log('Error launching dialer'));
 
