@@ -30,11 +30,11 @@ export class FirebaseProvider {
 
 
  
-  /*addUser(newUser, email, country, dateOfBirth) {
-    //this.afd.list('/userProfile/').push(email);
-    this.afd.database.ref('/userProfile').child(newUser.uid).set({ email: email, country:country, dateOfBirth:dateOfBirth})
+  saveSettings(emergencyNumber, country) {
+    //this.afd.list('/settings/').push([emergencyNumber, country]);
+    this.afd.database.ref('/settings').child(this.auth.getCurrentuserID()).update({ emergencyNumber:emergencyNumber, country:country})
 
-  }*/
+  }
  
   removeUser(email) {
     this.afd.list('/userProfile/').remove(email);

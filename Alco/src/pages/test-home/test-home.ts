@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { AuthenticatieProvider} from '../../providers/authenticatie/authenticatie'
 import { FirebaseProvider} from '../../providers/firebase/firebase'
 
@@ -18,7 +19,14 @@ import { FirebaseProvider} from '../../providers/firebase/firebase'
 })
 export class TestHomePage {
 
-  constructor(private afAuth: AuthenticatieProvider, public navCtrl: NavController, public navParams: NavParams, private fb: FirebaseProvider) {
+    public settingsForm: FormGroup;
+
+  constructor(private formBuilder: FormBuilder, private afAuth: AuthenticatieProvider, public navCtrl: NavController, public navParams: NavParams, private fb: FirebaseProvider) {
+    this.settingsForm = formBuilder.group({
+      emergencyNumber:[''],
+      country:['']
+    });
+    
   }
 
   logout(){
@@ -32,5 +40,7 @@ export class TestHomePage {
 
    }
 
-
+   save(){
+     this.fb.saveSettings(this.settingsForm.value.emergencyNumber, this.settingsForm.value.country);
+   }
 }
