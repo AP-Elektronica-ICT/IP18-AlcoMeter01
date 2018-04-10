@@ -29,17 +29,20 @@ export class FirebaseProvider {
     return profile;
   }
 
-  saveUserprofile(email, country, dateOfBirth){
+  saveUserprofile(email, password, country, dateOfBirth){
     var id = this.auth.getCurrentuserID();
     this.afd.database.ref(`/userProfile/${id}`).update({ email: email, country:country, dateOfBirth:dateOfBirth});
 
     var user = this.auth.angularfire.auth.currentUser;
-    /*user.updatePassword(password).then(function(){
+
+    user.updatePassword(password).then(function(){
       //toast message succesfull
       console.log("password changed sucesfully");
     }).catch(function(error){
       console.log(error);
-    });*/
+    });
+
+
     if(email != user.email){
       user.updateEmail(email).then(function(){
         user.sendEmailVerification().then(function(){
@@ -52,25 +55,9 @@ export class FirebaseProvider {
         console.log(error);
       });
     }
-    
-    /*this.auth.angularfire.authState.subscribe(user => {
-      if(user) {
-        user.email = email;
-        user.sendEmailVerification().then(function(){
-          //message of succes
-          console.log("email changed succesfull");
-        }).catch(function(error){
-          console.log(error);
-        });
-      }
-      else {
-          console.log("email not changed succesfully");
-      }
-    });*/
   }
  
   saveSettings(emergencyNumber, country) {
-    //this.afd.list('/settings/').push([emergencyNumber, country]);
     this.afd.database.ref('/settings').child(this.auth.getCurrentuserID()).update({ emergencyNumber:emergencyNumber, country:country})
 
   }
