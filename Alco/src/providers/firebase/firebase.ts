@@ -28,7 +28,9 @@ export class FirebaseProvider {
     return profile;
   }
 
-
+  saveUserprofile(email, country, dateOfBirth){
+    this.afd.database.ref('/userProfile').child(this.auth.getCurrentuserID()).update({ email: email, country:country, dateOfBirth:dateOfBirth})
+  }
  
   saveSettings(emergencyNumber, country) {
     //this.afd.list('/settings/').push([emergencyNumber, country]);
