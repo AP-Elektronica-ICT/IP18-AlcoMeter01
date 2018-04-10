@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { AuthenticatieProvider } from '../../providers/authenticatie/authenticatie';
 import { Observable } from 'rxjs/Observable';
+import { Toast } from 'ionic-angular/components/toast/toast';
 
 @Injectable()
 export class FirebaseProvider {
@@ -29,7 +30,34 @@ export class FirebaseProvider {
   }
 
   saveUserprofile(email, country, dateOfBirth){
-    this.afd.database.ref('/userProfile').child(this.auth.getCurrentuserID()).update({ email: email, country:country, dateOfBirth:dateOfBirth})
+    var id = this.auth.getCurrentuserID();
+    this.afd.database.ref(`/userProfile/${id}`).update({ email: email, country:country, dateOfBirth:dateOfBirth});
+    var user = this.auth.angularfire.auth.currentUser;
+    user.updateEmail(email).then(function(){
+      user.sendEmailVerification().then(function(){
+        //message of succes
+        console.log("email changed succesfull");
+      }).catch(function(error){
+        console.log(error);
+      });
+    }).catch(function(error){
+      console.log(error);
+    });
+    
+    /*this.auth.angularfire.authState.subscribe(user => {
+      if(user) {
+        user.email = email;
+        user.sendEmailVerification().then(function(){
+          //message of succes
+          console.log("email changed succesfull");
+        }).catch(function(error){
+          console.log(error);
+        });
+      }
+      else {
+          console.log("email not changed succesfully");
+      }
+    });*/
   }
  
   saveSettings(emergencyNumber, country) {

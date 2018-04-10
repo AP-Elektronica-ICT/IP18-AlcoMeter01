@@ -7,7 +7,7 @@ export class AuthenticatieProvider {
 
 userId: string;
 
-  constructor(private angularfire: AngularFireAuth) {
+  constructor(public angularfire: AngularFireAuth) {
 
   }
 
