@@ -32,17 +32,26 @@ export class FirebaseProvider {
   saveUserprofile(email, country, dateOfBirth){
     var id = this.auth.getCurrentuserID();
     this.afd.database.ref(`/userProfile/${id}`).update({ email: email, country:country, dateOfBirth:dateOfBirth});
+
     var user = this.auth.angularfire.auth.currentUser;
-    user.updateEmail(email).then(function(){
-      user.sendEmailVerification().then(function(){
-        //message of succes
-        console.log("email changed succesfull");
+    /*user.updatePassword(password).then(function(){
+      //toast message succesfull
+      console.log("password changed sucesfully");
+    }).catch(function(error){
+      console.log(error);
+    });*/
+    if(email != user.email){
+      user.updateEmail(email).then(function(){
+        user.sendEmailVerification().then(function(){
+          //message of succes
+          console.log("email changed succesfull");
+        }).catch(function(error){
+          console.log(error);
+        });
       }).catch(function(error){
         console.log(error);
       });
-    }).catch(function(error){
-      console.log(error);
-    });
+    }
     
     /*this.auth.angularfire.authState.subscribe(user => {
       if(user) {
