@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { FirebaseProvider } from '../../providers/firebase/firebase';
 import { AuthenticatieProvider } from '../../providers/authenticatie/authenticatie';
-
+import firebase from 'firebase';
 
 /**
  * Generated class for the PersonalInfoPage page.
@@ -42,7 +42,39 @@ export class PersonalInfoPage {
     this.fb.saveUserprofile(this.changeAccountForm.value.email, this.changeAccountForm.value.password, this.changeAccountForm.value.country, this.changeAccountForm.value.dateOfBirth);
   }
 
-  save(){
-    this.fb.presentPrompt(this.changeUser);
+  presentPrompt() {
+    let alert = this.alert.create({
+      title: 'Confirm Changes',
+      inputs: [
+
+        {
+          name: 'password',
+          placeholder: 'Password',
+          type: 'password'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Save',
+          handler: data => {
+            var user = this.afAuth.angularfire.auth.currentUser;
+            const credential = firebase.auth.EmailAuthProvider.credential(user.email, data.password);
+            user.reauthenticateWithCredential(credential).then(() => {
+              this.changeUser();
+            }).catch(error => {
+              console.log("authentication failure");
+            })
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 }

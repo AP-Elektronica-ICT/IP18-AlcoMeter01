@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
-import { AlertController } from 'ionic-angular';
+import { AngularFireDatabase} from 'angularfire2/database';
+//import { AlertController } from 'ionic-angular';
 import { AuthenticatieProvider } from '../../providers/authenticatie/authenticatie';
-import { Observable } from 'rxjs/Observable';
-import firebase from 'firebase';
+//import { Observable } from 'rxjs/Observable';
+//import firebase from 'firebase';
 
 @Injectable()
 export class FirebaseProvider {
@@ -81,44 +81,6 @@ export class FirebaseProvider {
       console.log("settings saved");
     });
     
-  }
-
-  
-  presentPrompt(changeUser) {
-    let alert = this.alert.create({
-      title: 'Confirm Changes',
-      inputs: [
-
-        {
-          name: 'password',
-          placeholder: 'Password',
-          type: 'password'
-        }
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          handler: data => {
-            console.log('Cancel clicked');
-          }
-        },
-        {
-          text: 'Save',
-          handler: data => {
-            var user = this.auth.angularfire.auth.currentUser;
-            const credential = firebase.auth.EmailAuthProvider.credential(user.email, data.password);
-            user.reauthenticateWithCredential(credential).then(() => {
-              changeUser();
-              console.log(data.password);
-            }).catch(error => {
-              console.log("authentication failure");
-            })
-          }
-        }
-      ]
-    });
-    alert.present();
   }
 
 }
