@@ -27,6 +27,7 @@ export class TestHomePage {
       country:['']
     });
     
+    this.fb.getSettings();
   }
 
   logout(){

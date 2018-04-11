@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+import { AlertController } from 'ionic-angular';
 import { AuthenticatieProvider } from '../../providers/authenticatie/authenticatie';
 import { Observable } from 'rxjs/Observable';
-import { Toast } from 'ionic-angular/components/toast/toast';
+import firebase from 'firebase';
 
 @Injectable()
 export class FirebaseProvider {
 
   
 
-  constructor(public afd: AngularFireDatabase, public auth: AuthenticatieProvider) {}
+  constructor(public afd: AngularFireDatabase, public auth: AuthenticatieProvider, public alert: AlertController) {}
+
   getUserProfile() {
     var arr = [];
     var profile = {
@@ -56,16 +58,67 @@ export class FirebaseProvider {
       });
     }
   }
- 
-  saveSettings(emergencyNumber, country) {
-    this.afd.database.ref('/settings').child(this.auth.getCurrentuserID()).update({ emergencyNumber:emergencyNumber, country:country})
 
+  getSettings(){
+    var arr = [];
+    var settings = {
+      "country": String,
+      "emergencyNumber": Date
+    }
+    var id = this.auth.getCurrentuserID();
+    console.log("userId in firebaseProvider: ", id);
+    this.afd.database.ref(`/settings/${id}/`).on('value', resp =>{
+      arr = snapshotToArray(resp);
+      settings.country=arr[0];
+      settings.emergencyNumber=arr[1];
+      console.log("settings in provider: ", settings);
+    });
+    return settings;
   }
  
-  removeUser(email) {
-    this.afd.list('/userProfile/').remove(email);
+  saveSettings(emergencyNumber, country) {
+    this.afd.database.ref('/settings').child(this.auth.getCurrentuserID()).update({ emergencyNumber:emergencyNumber, country:country}).then(() => {
+      console.log("settings saved");
+    });
+    
+  }
 
+  
+  presentPrompt(changeUser) {
+    let alert = this.alert.create({
+      title: 'Confirm Changes',
+      inputs: [
 
+        {
+          name: 'password',
+          placeholder: 'Password',
+          type: 'password'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Save',
+          handler: data => {
+            var user = this.auth.angularfire.auth.currentUser;
+            const credential = firebase.auth.EmailAuthProvider.credential(user.email, data.password);
+            user.reauthenticateWithCredential(credential).then(() => {
+              changeUser();
+              console.log(data.password);
+            }).catch(error => {
+              console.log("authentication failure");
+            })
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 
 }

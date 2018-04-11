@@ -52,7 +52,7 @@ export class MyApp {
         this.rootPage = 'LoginPage';
         unsubscribe();
       } else { 
-        this.rootPage = PersonalInfoPage;
+        this.rootPage = TestHomePage;
         unsubscribe();
       }
     });
