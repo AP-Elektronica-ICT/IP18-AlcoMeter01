@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { AngularFireAuth } from 'angularfire2/auth';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { AuthenticatieProvider} from '../../providers/authenticatie/authenticatie'
+import { FirebaseProvider} from '../../providers/firebase/firebase'
+
 
 /**
  * Generated class for the TestHomePage page.
@@ -16,16 +19,29 @@ import { AngularFireAuth } from 'angularfire2/auth';
 })
 export class TestHomePage {
 
-  constructor(private afAuth: AngularFireAuth, public navCtrl: NavController, public navParams: NavParams) {
+    public settingsForm: FormGroup;
+
+  constructor(private formBuilder: FormBuilder, private afAuth: AuthenticatieProvider, public navCtrl: NavController, public navParams: NavParams, private fb: FirebaseProvider) {
+    this.settingsForm = formBuilder.group({
+      emergencyNumber:[''],
+      country:['']
+    });
+    
+    this.fb.getSettings();
   }
 
   logout(){
-    this.afAuth.auth.signOut();
+    this.afAuth.logOut();
     this.navCtrl.push('LoginPage');
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TestHomePage');
-  }
+    console.log("profile in homepage: ", this.fb.getUserProfile());
 
+   }
+
+   save(){
+     this.fb.saveSettings(this.settingsForm.value.emergencyNumber, this.settingsForm.value.country);
+   }
 }

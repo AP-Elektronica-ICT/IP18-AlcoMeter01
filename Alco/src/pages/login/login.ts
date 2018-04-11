@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { User } from '../../models/user';
-import {AngularFireAuth} from 'angularfire2/auth';
 import {CreateAccountPage } from './../create-account/create-account';
 import {ResetPasswordPage} from './../reset-password/reset-password';
-import { SettingsPage } from './../settings/settings';
 import { MainPage } from '../main/main';
+import { AuthenticatieProvider } from '../../providers/authenticatie/authenticatie'
+
 /**
  * Generated class for the LoginPage page.
  *
@@ -21,7 +21,9 @@ import { MainPage } from '../main/main';
 export class LoginPage {
 
   user = {} as User;
-  constructor(private afAuth: AngularFireAuth, public navCtrl: NavController) {
+
+  constructor(private afAuth: AuthenticatieProvider, public navCtrl: NavController, public navParams: NavParams) {
+
   }
 
   ionViewDidLoad() {
@@ -29,7 +31,7 @@ export class LoginPage {
   }
   async login(user: User){
    try {
-    const result = this.afAuth.auth.signInWithEmailAndPassword(user.email, user.password);
+    const result = this.afAuth.LoginUser(user.email, user.password);
     if(result){
       this.navCtrl.push(MainPage);
     }
