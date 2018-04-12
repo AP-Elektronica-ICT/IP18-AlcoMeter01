@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, Loading, LoadingController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { FirebaseProvider } from '../../providers/firebase/firebase';
 import { AuthenticatieProvider } from '../../providers/authenticatie/authenticatie';
@@ -21,11 +21,11 @@ import { Subscription } from 'rxjs/Subscription';
 export class PersonalInfoPage {
 
   changeAccountForm: FormGroup;
-  constructor(private alert: AlertController, public navCtrl: NavController, public navParams: NavParams, formBuilder: FormBuilder, private fb: FirebaseProvider, private afAuth: AuthenticatieProvider) {
+  constructor(private loadingCtrl: LoadingController, private alert: AlertController, public navCtrl: NavController, public navParams: NavParams, formBuilder: FormBuilder, private fb: FirebaseProvider, private afAuth: AuthenticatieProvider) {
     this.changeAccountForm = formBuilder.group({
-      email:['', Validators.compose([Validators.required, Validators.email])],
-      password:['', Validators.compose([Validators.required, Validators.minLength(6)])],
-      confirmPassword:['', Validators.compose([Validators.required, matchOtherValidator('password')])],
+      email:['', Validators.compose([ Validators.email])],
+      password:['', Validators.compose([Validators.minLength(6)])],
+      confirmPassword:['', Validators.compose([matchOtherValidator('password')])],
       country:[''],
       dateOfBirth:['']
     });
@@ -40,8 +40,23 @@ export class PersonalInfoPage {
     this.navCtrl.push('LoginPage');
   }
 
-  changeUser(){
-    this.fb.saveUserprofile(this.changeAccountForm.value.email, this.changeAccountForm.value.password, this.changeAccountForm.value.country, this.changeAccountForm.value.dateOfBirth);
+  async changeUser(loading: Loading){
+    try {
+      await this.fb.saveUserprofile(this.changeAccountForm.value.email, this.changeAccountForm.value.password, this.changeAccountForm.value.country, this.changeAccountForm.value.dateOfBirth);
+      loading.dismiss();
+      const alert = this.alert.create({
+        message: "Changes saved succesfully",
+        buttons: [{ text: 'Ok', role: 'cancel' }]
+      });
+      alert.present();
+    }catch(error){
+      loading.dismiss();
+      const alert = this.alert.create({
+        message: error.message,
+        buttons: [{ text: 'Ok', role: 'cancel' }]
+      });
+      alert.present();
+    }    
   }
 
   presentPrompt() {
@@ -59,18 +74,28 @@ export class PersonalInfoPage {
           text: 'Cancel',
           role: 'cancel',
           handler: data => {
-            console.log('Cancel clicked');
+          //console.log('Cancel clicked');
           }
         },
         {
           text: 'Save',
           handler: data => {
+            const loading: Loading = this.loadingCtrl.create();
+            loading.present();
+
             var user = this.afAuth.angularfire.auth.currentUser;
             const credential = firebase.auth.EmailAuthProvider.credential(user.email, data.password);
             user.reauthenticateWithCredential(credential).then(() => {
-              this.changeUser();
+              this.changeUser(loading);
+
             }).catch(error => {
-              console.log("authentication failure");
+              //console.log("authentication failure");
+              loading.dismiss();
+              const alert = this.alert.create({
+                message: error.message,
+                buttons: [{ text: 'Ok', role: 'cancel' }]
+              });
+              alert.present();
             })
           }
         }
