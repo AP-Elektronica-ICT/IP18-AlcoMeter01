@@ -1,7 +1,8 @@
 import { Component, transition } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { BluetoothProvider } from '../../providers/bluetooth/bluetooth';
-
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { FirebaseProvider} from '../../providers/firebase/firebase'
 
 
 @IonicPage()
@@ -11,11 +12,24 @@ import { BluetoothProvider } from '../../providers/bluetooth/bluetooth';
 })
 export class SettingsPage {
 
+  public settingsForm: FormGroup;
   public connectedDevice: any;
   public availableDevices: any[] = [];
   public meting: any;
 
-  constructor(public bt: BluetoothProvider, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private formBuilder: FormBuilder, public bt: BluetoothProvider, public navCtrl: NavController, public navParams: NavParams, private fb: FirebaseProvider) {
+    this.settingsForm = formBuilder.group({
+      emergencyNumber:[''],
+      country:['']
+    });
+    
+    this.fb.getSettings();
+    console.log("profile in settingspage: ", this.fb.getUserProfile());
+    
+  }
+
+  save(){
+    this.fb.saveSettings(this.settingsForm.value.emergencyNumber, this.settingsForm.value.country);
   }
 
   startScanning(){

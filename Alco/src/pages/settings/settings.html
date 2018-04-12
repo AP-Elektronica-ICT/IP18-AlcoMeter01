@@ -10,7 +10,6 @@
 
 <ion-content padding>
 
-
   <ion-list padding>
     <button ion-button block (click)="startScanning()">scan</button>
     <ion-list-header>
@@ -31,7 +30,36 @@
     <ion-spinner name="crescent" *ngIf="scanning"></ion-spinner>
     <button ion-button block (click)="receiveData()">Receive</button>
     <ion-item *ngIf = 'meting'>{{meting}}</ion-item>
+  
+  
+  <form [formGroup]="settingsForm" (submit)="save()">
+    <ion-list style="position:absolute; top:10%; left:20%;">
+      <ion-item>
+        <ion-label floating>Family emergency number</ion-label>
+        <ion-input  type="text" formControlName="emergencyNumber"></ion-input>
+      </ion-item>
+      
+  
+      <ion-item>
+        <ion-label>Current country</ion-label>
+        <ion-select formControlName="country">
+          <ion-option value="België">België</ion-option>
+          <ion-option value="Suomi">Suomi</ion-option>
+          <ion-option value="Deutschland">Deutschland</ion-option>
+          <ion-option value="Nederland">Nederland</ion-option>
+          <ion-option value="France">France</ion-option>
+          <ion-option value="Lëtzebuerg">Lëtzebuerg</ion-option>
+          <ion-option value="Portugal">Portugal</ion-option>
+          <ion-option value="Sverige">Sverige</ion-option>
+          <ion-option value="Great Britian">Great Britian</ion-option>
+          <ion-option value="România">România</ion-option>
+          <ion-option value="Italia">Italia</ion-option>
+        </ion-select>
+      </ion-item>
+    
+    
+      <button type="submit"  style="position:absolute; top:105%; background-color:lightblue; width:100%" ion-button>Save</button>
+      </ion-list>
+    </form>
   </ion-list>
-  
-  
 </ion-content>

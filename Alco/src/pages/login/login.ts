@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, Loading, LoadingController } from 'ionic-angular';
 import { User } from '../../models/user';
 import {CreateAccountPage } from './../create-account/create-account';
 import {ResetPasswordPage} from './../reset-password/reset-password';
@@ -22,7 +22,7 @@ export class LoginPage {
 
   user = {} as User;
 
-  constructor(private afAuth: AuthenticatieProvider, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private loadingCtrl: LoadingController, private afAuth: AuthenticatieProvider, public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController) {
 
   }
 
@@ -30,15 +30,21 @@ export class LoginPage {
     console.log('ionViewDidLoad LoginPage');
   }
   async login(user: User){
+    const loading: Loading = this.loadingCtrl.create();
+    loading.present();
    try {
-    const result = this.afAuth.LoginUser(user.email, user.password);
-    if(result){
+    await this.afAuth.LoginUser(user.email, user.password).then(() => {
+      loading.dismiss();
       this.navCtrl.push(MainPage);
+    });
+  }catch(error){
+    loading.dismiss();
+    const alert = this.alertCtrl.create({
+      message: error.message,
+      buttons: [{ text: 'Ok', role: 'cancel' }]
+    });
+    alert.present();
     }
-   } 
-   catch(e){
-    console.error(e);
-   }
   }
 
   createAccount(){
