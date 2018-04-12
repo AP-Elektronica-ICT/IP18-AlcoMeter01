@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Loading, LoadingController, AlertController } from 'ionic-angular';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
 import { AuthenticatieProvider } from '../../providers/authenticatie/authenticatie';
 import { TestHomePage } from '../test-home/test-home';
+import { Subscription } from 'rxjs/Subscription';
 
 /**
  * Generated class for the CreateAccountPage page.
@@ -27,10 +28,12 @@ export class CreateAccountPage {
             public alertCtrl: AlertController
           ) {
             this.createAccountForm = formBuilder.group({
-              email:[''],
-              password:[''],
-              country:[''],
-              dateOfBirth:['']
+              email:['', Validators.compose([Validators.required, Validators.email])],
+              password:['', Validators.compose([Validators.required, Validators.minLength(6)])],
+              confirmPassword:['',Validators.compose([Validators.required, matchOtherValidator('password')])],
+              country:['', Validators.compose([Validators.required])],
+              dateOfBirth:['', Validators.compose([Validators.required])],
+              agree:[false, Validators.requiredTrue]
             });
   }
 
@@ -38,12 +41,51 @@ export class CreateAccountPage {
     console.log('ionViewDidLoad CreateAccountPage');
   }
 
-  signUpUser(){
-    this.authProvider.CreateNewUser(this.createAccountForm.value.email, this.createAccountForm.value.password, this.createAccountForm.value.country, this.createAccountForm.value.dateOfBirth)
-  .then(()=>{
-    this.navCtrl.setRoot(TestHomePage);
-  });
+  async signUpUser(){
+    if(!this.createAccountForm.valid){
+      const alert = this.alertCtrl.create({
+        message: "Form not valid",
+        buttons: [{ text: 'Ok', role: 'cancel' }]
+      });
+      alert.present();
+    }
+    else{
+      const loading: Loading = this.loadingCtrl.create();
+      loading.present();
+      try{
+        await this.authProvider.CreateNewUser(this.createAccountForm.value.email, this.createAccountForm.value.password, this.createAccountForm.value.country, this.createAccountForm.value.dateOfBirth)
+        .then(()=>{
+          loading.dismiss();
+          this.navCtrl.setRoot(TestHomePage);
+        });
+      } catch(error){
+          const alert = this.alertCtrl.create({
+          message: error.message,
+          buttons: [{ text: 'Ok', role: 'cancel' }]
+        });
+        alert.present();
+      }
+      
+  
+    }
   }
 
 
+}
+
+export function matchOtherValidator(otherControlName: string): ValidatorFn {
+  return (control: AbstractControl): { [key: string]: any } => {
+      const otherControl: AbstractControl = control.root.get(otherControlName);
+
+      if (otherControl) {
+          const subscription: Subscription = otherControl
+              .valueChanges
+              .subscribe(() => {
+                  control.updateValueAndValidity();
+                  subscription.unsubscribe();
+              });
+      }
+
+      return (otherControl && control.value !== otherControl.value) ? {match: true} : null;
+  };
 }
