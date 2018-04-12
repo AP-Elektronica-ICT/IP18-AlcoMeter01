@@ -42,14 +42,14 @@ export class CreateAccountPage {
   }
 
   async signUpUser(){
-    if(!this.createAccountForm.valid){
+    /*if(!this.createAccountForm.valid){
       const alert = this.alertCtrl.create({
         message: "Form not valid",
         buttons: [{ text: 'Ok', role: 'cancel' }]
       });
       alert.present();
     }
-    else{
+    else{*/
       const loading: Loading = this.loadingCtrl.create();
       loading.present();
       try{
@@ -59,18 +59,15 @@ export class CreateAccountPage {
           this.navCtrl.setRoot(TestHomePage);
         });
       } catch(error){
+          loading.dismiss();
           const alert = this.alertCtrl.create({
           message: error.message,
           buttons: [{ text: 'Ok', role: 'cancel' }]
         });
         alert.present();
       }
-      
-  
-    }
+    //}
   }
-
-
 }
 
 export function matchOtherValidator(otherControlName: string): ValidatorFn {

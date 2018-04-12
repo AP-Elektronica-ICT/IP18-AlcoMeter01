@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { FirebaseProvider } from '../../providers/firebase/firebase';
 import { AuthenticatieProvider } from '../../providers/authenticatie/authenticatie';
 import firebase from 'firebase';
+import { Subscription } from 'rxjs/Subscription';
 
 /**
  * Generated class for the PersonalInfoPage page.
@@ -22,8 +23,9 @@ export class PersonalInfoPage {
   changeAccountForm: FormGroup;
   constructor(private alert: AlertController, public navCtrl: NavController, public navParams: NavParams, formBuilder: FormBuilder, private fb: FirebaseProvider, private afAuth: AuthenticatieProvider) {
     this.changeAccountForm = formBuilder.group({
-      email:[''],
-      password:[''],
+      email:['', Validators.compose([Validators.required, Validators.email])],
+      password:['', Validators.compose([Validators.required, Validators.minLength(6)])],
+      confirmPassword:['', Validators.compose([Validators.required, matchOtherValidator('password')])],
       country:[''],
       dateOfBirth:['']
     });
@@ -46,7 +48,6 @@ export class PersonalInfoPage {
     let alert = this.alert.create({
       title: 'Confirm Changes',
       inputs: [
-
         {
           name: 'password',
           placeholder: 'Password',
@@ -77,4 +78,21 @@ export class PersonalInfoPage {
     });
     alert.present();
   }
+}
+
+export function matchOtherValidator(otherControlName: string): ValidatorFn {
+  return (control: AbstractControl): { [key: string]: any } => {
+      const otherControl: AbstractControl = control.root.get(otherControlName);
+
+      if (otherControl) {
+          const subscription: Subscription = otherControl
+              .valueChanges
+              .subscribe(() => {
+                  control.updateValueAndValidity();
+                  subscription.unsubscribe();
+              });
+      }
+
+      return (otherControl && control.value !== otherControl.value) ? {match: true} : null;
+  };
 }
