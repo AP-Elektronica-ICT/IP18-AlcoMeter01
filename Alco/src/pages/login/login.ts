@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { User } from '../../models/user';
 import {CreateAccountPage } from './../create-account/create-account';
 import {ResetPasswordPage} from './../reset-password/reset-password';
@@ -22,7 +22,7 @@ export class LoginPage {
 
   user = {} as User;
 
-  constructor(private afAuth: AuthenticatieProvider, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private afAuth: AuthenticatieProvider, public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController) {
 
   }
 
@@ -31,14 +31,16 @@ export class LoginPage {
   }
   async login(user: User){
    try {
-    const result = this.afAuth.LoginUser(user.email, user.password);
-    if(result){
+    await this.afAuth.LoginUser(user.email, user.password).then(() => {
       this.navCtrl.push(MainPage);
+    });
+  }catch(error){
+    const alert = this.alertCtrl.create({
+      message: error.message,
+      buttons: [{ text: 'Ok', role: 'cancel' }]
+    });
+    alert.present();
     }
-   } 
-   catch(e){
-    console.error(e);
-   }
   }
 
   createAccount(){
