@@ -15,7 +15,7 @@ export class SettingsPage {
   public settingsForm: FormGroup;
   public connectedDevice: any;
   public availableDevices: any[] = [];
-  public meting: any;
+  
 
   constructor(private formBuilder: FormBuilder, public bt: BluetoothProvider, public navCtrl: NavController, public navParams: NavParams, private fb: FirebaseProvider) {
     this.settingsForm = formBuilder.group({
@@ -46,9 +46,6 @@ export class SettingsPage {
     this.connectedDevice = this.bt.connectedDevice;
   }
 
-  receiveData(){
-    this.bt.receiveData();
-    this.meting = this.bt.meting;
-  }
+
 }
 
