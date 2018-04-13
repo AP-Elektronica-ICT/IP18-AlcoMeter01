@@ -28,12 +28,11 @@
       {{connectedDevice.name}}
     </ion-item>
     <ion-spinner name="crescent" *ngIf="scanning"></ion-spinner>
-    <button ion-button block (click)="receiveData()">Receive</button>
-    <ion-item *ngIf = 'meting'>{{meting}}</ion-item>
+    
   
   
   <form [formGroup]="settingsForm" (submit)="save()">
-    <ion-list style="position:absolute; top:10%; left:20%;">
+    <ion-list>
       <ion-item>
         <ion-label floating>Family emergency number</ion-label>
         <ion-input  type="text" formControlName="emergencyNumber"></ion-input>

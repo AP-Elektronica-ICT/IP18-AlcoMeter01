@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AuthenticatieProvider } from '../../providers/authenticatie/authenticatie';
+import { BluetoothProvider } from '../../providers/bluetooth/bluetooth';
 
 /**
  * Generated class for the MainPage page.
@@ -16,7 +17,9 @@ import { AuthenticatieProvider } from '../../providers/authenticatie/authenticat
 })
 export class MainPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public afAuth: AuthenticatieProvider) {
+  public meting: any;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public afAuth: AuthenticatieProvider, public bt: BluetoothProvider) {
   }
 
   ionViewDidLoad() {
@@ -36,4 +39,8 @@ export class MainPage {
     this.navCtrl.push('LoginPage');
   }
 
+  receiveData(){
+    this.bt.receiveData();
+    this.meting = this.bt.meting;
+  }
 }
