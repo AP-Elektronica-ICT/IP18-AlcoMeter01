@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AuthenticatieProvider } from '../../providers/authenticatie/authenticatie';
 import { BluetoothProvider } from '../../providers/bluetooth/bluetooth';
-
+import { Chart } from 'chart.js';
 /**
  * Generated class for the MainPage page.
  *
@@ -17,9 +17,12 @@ import { BluetoothProvider } from '../../providers/bluetooth/bluetooth';
 })
 export class MainPage {
 
-  public meting: any;
+  public meting: number;
+  donutChart:any;
+  total: number = 2;
+  maxPromille: number = 0.5;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public afAuth: AuthenticatieProvider, public bt: BluetoothProvider) {
+  constructor( public navCtrl: NavController, public navParams: NavParams, public afAuth: AuthenticatieProvider, public bt: BluetoothProvider) {
   }
 
   ionViewDidLoad() {
@@ -31,7 +34,27 @@ export class MainPage {
 
   public onButtonClick() {
 
-      this.buttonClicked = !this.buttonClicked;
+    //this.receiveData();
+    this.meting = 1.2;
+    
+    this.donutChart = new Chart(document.getElementById('donutChart'), {
+      
+                 type: 'doughnut',
+                 data: {
+                     labels: [this.label(this.meting)],
+                     datasets: [{
+                         label: '# alcohol promille',
+                         data: [this.meting, this.total-this.meting],
+                         backgroundColor: [
+                           
+                           this.color(this.meting),
+                           'rgb(255, 206, 86)'
+                            
+                         ]
+                     }]
+                 }
+      
+             });
   }
 
   logout(){
@@ -42,5 +65,19 @@ export class MainPage {
   receiveData(){
     this.bt.receiveData();
     this.meting = this.bt.meting;
+  }
+
+  color(meting: number){
+    if(meting < this.maxPromille)
+    return 'rgb(75, 192, 192)';
+    else 
+    return 'rgb(255, 99, 132)';
+  }
+
+  label(meting:number){
+    if(meting < this.maxPromille)
+    return "Drive";
+    else 
+    return 'No drive';
   }
 }
