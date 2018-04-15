@@ -32,8 +32,9 @@ export class FirebaseProvider {
   }
 
   saveUserprofile(email, password, country, dateOfBirth){
-    var id = this.auth.getCurrentuserID();
-    this.afd.database.ref(`/userProfile/${id}`).update({ email: email, country:country, dateOfBirth:dateOfBirth});
+    this.auth.getCurrentuserID().then(id => {
+      this.afd.database.ref(`/userProfile/${id}`).update({ email: email, country:country, dateOfBirth:dateOfBirth});
+    });
 
     var user = this.auth.angularfire.auth.currentUser;
 
@@ -77,12 +78,18 @@ export class FirebaseProvider {
   }
  
   saveSettings(emergencyNumber, country) {
-    this.afd.database.ref('/settings').child(this.auth.getCurrentuserID()).update({ emergencyNumber:emergencyNumber, country:country}).then(() => {
-      console.log("settings saved");
-    });
-    
+    this.auth.getCurrentuserID().then(id => {
+      this.afd.database.ref(`/settings/${id}/`).update({ emergencyNumber:emergencyNumber, country:country}).then(() => {
+        console.log("settings saved");
+      });
+    });  
   }
 
+  saveMeasurement(meting){
+    this.auth.getCurrentuserID().then(id => {
+      this.afd.database.ref(`/meting/${id}/`).push(meting);
+    });  
+  }
 }
 
 export const snapshotToArray = snapshot => {

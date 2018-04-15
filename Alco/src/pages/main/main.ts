@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AuthenticatieProvider } from '../../providers/authenticatie/authenticatie';
+import { FirebaseProvider } from '../../providers/firebase/firebase';
 import { BluetoothProvider } from '../../providers/bluetooth/bluetooth';
 import { Chart } from 'chart.js';
 /**
@@ -22,7 +23,7 @@ export class MainPage {
   total: number = 2;
   maxPromille: number = 0.5;
 
-  constructor( public navCtrl: NavController, public navParams: NavParams, public afAuth: AuthenticatieProvider, public bt: BluetoothProvider) {
+  constructor(public fb: FirebaseProvider, public navCtrl: NavController, public navParams: NavParams, public afAuth: AuthenticatieProvider, public bt: BluetoothProvider) {
   }
 
   ionViewDidLoad() {
@@ -35,19 +36,20 @@ export class MainPage {
   public onButtonClick() {
 
     //this.receiveData();
-    this.meting = 1.2;
+    this.meting = 0.02;
+    this.fb.saveMeasurement(this.meting);
     
     this.donutChart = new Chart(document.getElementById('donutChart'), {
       
                  type: 'doughnut',
                  data: {
-                     labels: [this.label(this.meting)],
+                     labels: [this.label()],
                      datasets: [{
                          label: '# alcohol promille',
                          data: [this.meting, this.total-this.meting],
                          backgroundColor: [
                            
-                           this.color(this.meting),
+                           this.color(),
                            'rgb(255, 206, 86)'
                             
                          ]
@@ -62,20 +64,20 @@ export class MainPage {
     this.navCtrl.push('LoginPage');
   }
 
-  receiveData(){
+  private receiveData(){
     this.bt.receiveData();
     this.meting = this.bt.meting;
   }
 
-  color(meting: number){
-    if(meting < this.maxPromille)
+  private color(){
+    if(this.meting < this.maxPromille)
     return 'rgb(75, 192, 192)';
     else 
     return 'rgb(255, 99, 132)';
   }
 
-  label(meting:number){
-    if(meting < this.maxPromille)
+  private label(){
+    if(this.meting < this.maxPromille)
     return "Drive";
     else 
     return 'No drive';
