@@ -9,7 +9,7 @@ webpackJsonp([4],{
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_authenticatie_authenticatie__ = __webpack_require__(40);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_firebase_firebase__ = __webpack_require__(91);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_firebase_firebase__ = __webpack_require__(70);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -273,6 +273,41 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [0, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
 
 
 
@@ -296,25 +331,45 @@ var BluetoothProvider = (function () {
         });
     }
     BluetoothProvider.prototype.connectMAC = function (device) {
-        var _this = this;
-        this.bluetoothSerial.connect(device.id).subscribe(function (rspo) {
-            console.log("connected to HC-06 device", rspo);
-            _this.connectedDevice = device;
-        }, function (error) {
-            console.log("error", error);
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.bluetoothSerial.connect(device.id).subscribe(function (rspo) {
+                            console.log("connected to HC-06 device", rspo);
+                            _this.connectedDevice = device;
+                        }, function (error) {
+                            console.log("error", error);
+                        })];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
         });
     };
     BluetoothProvider.prototype.startScanning = function () {
-        var _this = this;
-        this.scanning = true;
-        var i = 0;
-        this.bluetoothSerial.setDeviceDiscoveredListener().forEach(function (device) {
-            console.log(device.id);
-            _this.availableDevices[i] = device;
-            console.log("unpaired devices: " + _this.availableDevices[i].name);
-            i++;
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            var i;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        this.scanning = true;
+                        i = 0;
+                        return [4 /*yield*/, this.bluetoothSerial.setDeviceDiscoveredListener().forEach(function (device) {
+                                console.log(device.id);
+                                _this.availableDevices[i] = device;
+                                console.log("unpaired devices: " + _this.availableDevices[i].name);
+                                i++;
+                            })];
+                    case 1:
+                        _a.sent();
+                        this.bluetoothSerial.discoverUnpaired();
+                        return [2 /*return*/];
+                }
+            });
         });
-        this.bluetoothSerial.discoverUnpaired();
     };
     BluetoothProvider.prototype.selectDevice = function (device) {
         var _this = this;
@@ -392,9 +447,9 @@ var BluetoothProvider = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_firebase_firebase__ = __webpack_require__(91);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_firebase_firebase__ = __webpack_require__(70);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_authenticatie_authenticatie__ = __webpack_require__(40);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_firebase__ = __webpack_require__(81);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_firebase__ = __webpack_require__(82);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_firebase__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -787,7 +842,7 @@ function matchOtherValidator(otherControlName) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_bluetooth_bluetooth__ = __webpack_require__(142);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_firebase_firebase__ = __webpack_require__(91);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_firebase_firebase__ = __webpack_require__(70);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -922,13 +977,13 @@ var map = {
 		289
 	],
 	"../pages/main/main.module": [
-		421
+		420
 	],
 	"../pages/personal-info/personal-info.module": [
-		422
+		421
 	],
 	"../pages/reset-password/reset-password.module": [
-		423
+		422
 	],
 	"../pages/settings/settings.module": [
 		707,
@@ -939,7 +994,7 @@ var map = {
 		0
 	],
 	"../pages/test-home/test-home.module": [
-		424
+		423
 	]
 };
 function webpackAsyncContext(req) {
@@ -1002,7 +1057,7 @@ var LoginPageModule = (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AuthenticatieProvider; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_firebase__ = __webpack_require__(81);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_firebase__ = __webpack_require__(82);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_firebase__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__ = __webpack_require__(269);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -1096,17 +1151,16 @@ var AuthenticatieProvider = (function () {
     };
     AuthenticatieProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__["a" /* AngularFireAuth */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__["a" /* AngularFireAuth */]) === "function" && _a || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__["a" /* AngularFireAuth */]])
     ], AuthenticatieProvider);
     return AuthenticatieProvider;
-    var _a;
 }());
 
 //# sourceMappingURL=authenticatie.js.map
 
 /***/ }),
 
-/***/ 421:
+/***/ 420:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1144,7 +1198,7 @@ var MainPageModule = (function () {
 
 /***/ }),
 
-/***/ 422:
+/***/ 421:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1182,7 +1236,7 @@ var PersonalInfoPageModule = (function () {
 
 /***/ }),
 
-/***/ 423:
+/***/ 422:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1220,7 +1274,7 @@ var ResetPasswordPageModule = (function () {
 
 /***/ }),
 
-/***/ 424:
+/***/ 423:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1258,13 +1312,13 @@ var TestHomePageModule = (function () {
 
 /***/ }),
 
-/***/ 466:
+/***/ 465:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(467);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(487);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(466);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(486);
 
 
 Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
@@ -1272,7 +1326,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 /***/ }),
 
-/***/ 487:
+/***/ 486:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1285,11 +1339,11 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_call_call__ = __webpack_require__(165);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_call_number__ = __webpack_require__(224);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__app_component__ = __webpack_require__(703);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_status_bar__ = __webpack_require__(464);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_status_bar__ = __webpack_require__(463);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__angular_http__ = __webpack_require__(704);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_angularfire2_database__ = __webpack_require__(278);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__providers_firebase_firebase__ = __webpack_require__(91);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_native_splash_screen__ = __webpack_require__(465);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__providers_firebase_firebase__ = __webpack_require__(70);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_native_splash_screen__ = __webpack_require__(464);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_angularfire2__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_angularfire2_auth__ = __webpack_require__(269);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_login_login__ = __webpack_require__(140);
@@ -1297,18 +1351,18 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_create_account_create_account__ = __webpack_require__(166);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__providers_authenticatie_authenticatie__ = __webpack_require__(40);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_test_home_test_home__ = __webpack_require__(137);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__pages_test_home_test_home_module__ = __webpack_require__(424);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21_firebase__ = __webpack_require__(81);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__pages_test_home_test_home_module__ = __webpack_require__(423);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21_firebase__ = __webpack_require__(82);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_21_firebase__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__pages_reset_password_reset_password_module__ = __webpack_require__(423);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__pages_reset_password_reset_password_module__ = __webpack_require__(422);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__pages_reset_password_reset_password__ = __webpack_require__(141);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__pages_main_main__ = __webpack_require__(92);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__pages_settings_settings__ = __webpack_require__(167);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__pages_statistics_statistics__ = __webpack_require__(168);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__pages_personal_info_personal_info__ = __webpack_require__(143);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__providers_bluetooth_bluetooth__ = __webpack_require__(142);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__pages_main_main_module__ = __webpack_require__(421);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__pages_personal_info_personal_info_module__ = __webpack_require__(422);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__pages_main_main_module__ = __webpack_require__(420);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__pages_personal_info_personal_info_module__ = __webpack_require__(421);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1432,252 +1486,252 @@ var AppModule = (function () {
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./af": 298,
-	"./af.js": 298,
-	"./ar": 299,
-	"./ar-dz": 300,
-	"./ar-dz.js": 300,
-	"./ar-kw": 301,
-	"./ar-kw.js": 301,
-	"./ar-ly": 302,
-	"./ar-ly.js": 302,
-	"./ar-ma": 303,
-	"./ar-ma.js": 303,
-	"./ar-sa": 304,
-	"./ar-sa.js": 304,
-	"./ar-tn": 305,
-	"./ar-tn.js": 305,
-	"./ar.js": 299,
-	"./az": 306,
-	"./az.js": 306,
-	"./be": 307,
-	"./be.js": 307,
-	"./bg": 308,
-	"./bg.js": 308,
-	"./bm": 309,
-	"./bm.js": 309,
-	"./bn": 310,
-	"./bn.js": 310,
-	"./bo": 311,
-	"./bo.js": 311,
-	"./br": 312,
-	"./br.js": 312,
-	"./bs": 313,
-	"./bs.js": 313,
-	"./ca": 314,
-	"./ca.js": 314,
-	"./cs": 315,
-	"./cs.js": 315,
-	"./cv": 316,
-	"./cv.js": 316,
-	"./cy": 317,
-	"./cy.js": 317,
-	"./da": 318,
-	"./da.js": 318,
-	"./de": 319,
-	"./de-at": 320,
-	"./de-at.js": 320,
-	"./de-ch": 321,
-	"./de-ch.js": 321,
-	"./de.js": 319,
-	"./dv": 322,
-	"./dv.js": 322,
-	"./el": 323,
-	"./el.js": 323,
-	"./en-au": 324,
-	"./en-au.js": 324,
-	"./en-ca": 325,
-	"./en-ca.js": 325,
-	"./en-gb": 326,
-	"./en-gb.js": 326,
-	"./en-ie": 327,
-	"./en-ie.js": 327,
-	"./en-il": 328,
-	"./en-il.js": 328,
-	"./en-nz": 329,
-	"./en-nz.js": 329,
-	"./eo": 330,
-	"./eo.js": 330,
-	"./es": 331,
-	"./es-do": 332,
-	"./es-do.js": 332,
-	"./es-us": 333,
-	"./es-us.js": 333,
-	"./es.js": 331,
-	"./et": 334,
-	"./et.js": 334,
-	"./eu": 335,
-	"./eu.js": 335,
-	"./fa": 336,
-	"./fa.js": 336,
-	"./fi": 337,
-	"./fi.js": 337,
-	"./fo": 338,
-	"./fo.js": 338,
-	"./fr": 339,
-	"./fr-ca": 340,
-	"./fr-ca.js": 340,
-	"./fr-ch": 341,
-	"./fr-ch.js": 341,
-	"./fr.js": 339,
-	"./fy": 342,
-	"./fy.js": 342,
-	"./gd": 343,
-	"./gd.js": 343,
-	"./gl": 344,
-	"./gl.js": 344,
-	"./gom-latn": 345,
-	"./gom-latn.js": 345,
-	"./gu": 346,
-	"./gu.js": 346,
-	"./he": 347,
-	"./he.js": 347,
-	"./hi": 348,
-	"./hi.js": 348,
-	"./hr": 349,
-	"./hr.js": 349,
-	"./hu": 350,
-	"./hu.js": 350,
-	"./hy-am": 351,
-	"./hy-am.js": 351,
-	"./id": 352,
-	"./id.js": 352,
-	"./is": 353,
-	"./is.js": 353,
-	"./it": 354,
-	"./it.js": 354,
-	"./ja": 355,
-	"./ja.js": 355,
-	"./jv": 356,
-	"./jv.js": 356,
-	"./ka": 357,
-	"./ka.js": 357,
-	"./kk": 358,
-	"./kk.js": 358,
-	"./km": 359,
-	"./km.js": 359,
-	"./kn": 360,
-	"./kn.js": 360,
-	"./ko": 361,
-	"./ko.js": 361,
-	"./ky": 362,
-	"./ky.js": 362,
-	"./lb": 363,
-	"./lb.js": 363,
-	"./lo": 364,
-	"./lo.js": 364,
-	"./lt": 365,
-	"./lt.js": 365,
-	"./lv": 366,
-	"./lv.js": 366,
-	"./me": 367,
-	"./me.js": 367,
-	"./mi": 368,
-	"./mi.js": 368,
-	"./mk": 369,
-	"./mk.js": 369,
-	"./ml": 370,
-	"./ml.js": 370,
-	"./mn": 371,
-	"./mn.js": 371,
-	"./mr": 372,
-	"./mr.js": 372,
-	"./ms": 373,
-	"./ms-my": 374,
-	"./ms-my.js": 374,
-	"./ms.js": 373,
-	"./mt": 375,
-	"./mt.js": 375,
-	"./my": 376,
-	"./my.js": 376,
-	"./nb": 377,
-	"./nb.js": 377,
-	"./ne": 378,
-	"./ne.js": 378,
-	"./nl": 379,
-	"./nl-be": 380,
-	"./nl-be.js": 380,
-	"./nl.js": 379,
-	"./nn": 381,
-	"./nn.js": 381,
-	"./pa-in": 382,
-	"./pa-in.js": 382,
-	"./pl": 383,
-	"./pl.js": 383,
-	"./pt": 384,
-	"./pt-br": 385,
-	"./pt-br.js": 385,
-	"./pt.js": 384,
-	"./ro": 386,
-	"./ro.js": 386,
-	"./ru": 387,
-	"./ru.js": 387,
-	"./sd": 388,
-	"./sd.js": 388,
-	"./se": 389,
-	"./se.js": 389,
-	"./si": 390,
-	"./si.js": 390,
-	"./sk": 391,
-	"./sk.js": 391,
-	"./sl": 392,
-	"./sl.js": 392,
-	"./sq": 393,
-	"./sq.js": 393,
-	"./sr": 394,
-	"./sr-cyrl": 395,
-	"./sr-cyrl.js": 395,
-	"./sr.js": 394,
-	"./ss": 396,
-	"./ss.js": 396,
-	"./sv": 397,
-	"./sv.js": 397,
-	"./sw": 398,
-	"./sw.js": 398,
-	"./ta": 399,
-	"./ta.js": 399,
-	"./te": 400,
-	"./te.js": 400,
-	"./tet": 401,
-	"./tet.js": 401,
-	"./tg": 402,
-	"./tg.js": 402,
-	"./th": 403,
-	"./th.js": 403,
-	"./tl-ph": 404,
-	"./tl-ph.js": 404,
-	"./tlh": 405,
-	"./tlh.js": 405,
-	"./tr": 406,
-	"./tr.js": 406,
-	"./tzl": 407,
-	"./tzl.js": 407,
-	"./tzm": 408,
-	"./tzm-latn": 409,
-	"./tzm-latn.js": 409,
-	"./tzm.js": 408,
-	"./ug-cn": 410,
-	"./ug-cn.js": 410,
-	"./uk": 411,
-	"./uk.js": 411,
-	"./ur": 412,
-	"./ur.js": 412,
-	"./uz": 413,
-	"./uz-latn": 414,
-	"./uz-latn.js": 414,
-	"./uz.js": 413,
-	"./vi": 415,
-	"./vi.js": 415,
-	"./x-pseudo": 416,
-	"./x-pseudo.js": 416,
-	"./yo": 417,
-	"./yo.js": 417,
-	"./zh-cn": 418,
-	"./zh-cn.js": 418,
-	"./zh-hk": 419,
-	"./zh-hk.js": 419,
-	"./zh-tw": 420,
-	"./zh-tw.js": 420
+	"./af": 297,
+	"./af.js": 297,
+	"./ar": 298,
+	"./ar-dz": 299,
+	"./ar-dz.js": 299,
+	"./ar-kw": 300,
+	"./ar-kw.js": 300,
+	"./ar-ly": 301,
+	"./ar-ly.js": 301,
+	"./ar-ma": 302,
+	"./ar-ma.js": 302,
+	"./ar-sa": 303,
+	"./ar-sa.js": 303,
+	"./ar-tn": 304,
+	"./ar-tn.js": 304,
+	"./ar.js": 298,
+	"./az": 305,
+	"./az.js": 305,
+	"./be": 306,
+	"./be.js": 306,
+	"./bg": 307,
+	"./bg.js": 307,
+	"./bm": 308,
+	"./bm.js": 308,
+	"./bn": 309,
+	"./bn.js": 309,
+	"./bo": 310,
+	"./bo.js": 310,
+	"./br": 311,
+	"./br.js": 311,
+	"./bs": 312,
+	"./bs.js": 312,
+	"./ca": 313,
+	"./ca.js": 313,
+	"./cs": 314,
+	"./cs.js": 314,
+	"./cv": 315,
+	"./cv.js": 315,
+	"./cy": 316,
+	"./cy.js": 316,
+	"./da": 317,
+	"./da.js": 317,
+	"./de": 318,
+	"./de-at": 319,
+	"./de-at.js": 319,
+	"./de-ch": 320,
+	"./de-ch.js": 320,
+	"./de.js": 318,
+	"./dv": 321,
+	"./dv.js": 321,
+	"./el": 322,
+	"./el.js": 322,
+	"./en-au": 323,
+	"./en-au.js": 323,
+	"./en-ca": 324,
+	"./en-ca.js": 324,
+	"./en-gb": 325,
+	"./en-gb.js": 325,
+	"./en-ie": 326,
+	"./en-ie.js": 326,
+	"./en-il": 327,
+	"./en-il.js": 327,
+	"./en-nz": 328,
+	"./en-nz.js": 328,
+	"./eo": 329,
+	"./eo.js": 329,
+	"./es": 330,
+	"./es-do": 331,
+	"./es-do.js": 331,
+	"./es-us": 332,
+	"./es-us.js": 332,
+	"./es.js": 330,
+	"./et": 333,
+	"./et.js": 333,
+	"./eu": 334,
+	"./eu.js": 334,
+	"./fa": 335,
+	"./fa.js": 335,
+	"./fi": 336,
+	"./fi.js": 336,
+	"./fo": 337,
+	"./fo.js": 337,
+	"./fr": 338,
+	"./fr-ca": 339,
+	"./fr-ca.js": 339,
+	"./fr-ch": 340,
+	"./fr-ch.js": 340,
+	"./fr.js": 338,
+	"./fy": 341,
+	"./fy.js": 341,
+	"./gd": 342,
+	"./gd.js": 342,
+	"./gl": 343,
+	"./gl.js": 343,
+	"./gom-latn": 344,
+	"./gom-latn.js": 344,
+	"./gu": 345,
+	"./gu.js": 345,
+	"./he": 346,
+	"./he.js": 346,
+	"./hi": 347,
+	"./hi.js": 347,
+	"./hr": 348,
+	"./hr.js": 348,
+	"./hu": 349,
+	"./hu.js": 349,
+	"./hy-am": 350,
+	"./hy-am.js": 350,
+	"./id": 351,
+	"./id.js": 351,
+	"./is": 352,
+	"./is.js": 352,
+	"./it": 353,
+	"./it.js": 353,
+	"./ja": 354,
+	"./ja.js": 354,
+	"./jv": 355,
+	"./jv.js": 355,
+	"./ka": 356,
+	"./ka.js": 356,
+	"./kk": 357,
+	"./kk.js": 357,
+	"./km": 358,
+	"./km.js": 358,
+	"./kn": 359,
+	"./kn.js": 359,
+	"./ko": 360,
+	"./ko.js": 360,
+	"./ky": 361,
+	"./ky.js": 361,
+	"./lb": 362,
+	"./lb.js": 362,
+	"./lo": 363,
+	"./lo.js": 363,
+	"./lt": 364,
+	"./lt.js": 364,
+	"./lv": 365,
+	"./lv.js": 365,
+	"./me": 366,
+	"./me.js": 366,
+	"./mi": 367,
+	"./mi.js": 367,
+	"./mk": 368,
+	"./mk.js": 368,
+	"./ml": 369,
+	"./ml.js": 369,
+	"./mn": 370,
+	"./mn.js": 370,
+	"./mr": 371,
+	"./mr.js": 371,
+	"./ms": 372,
+	"./ms-my": 373,
+	"./ms-my.js": 373,
+	"./ms.js": 372,
+	"./mt": 374,
+	"./mt.js": 374,
+	"./my": 375,
+	"./my.js": 375,
+	"./nb": 376,
+	"./nb.js": 376,
+	"./ne": 377,
+	"./ne.js": 377,
+	"./nl": 378,
+	"./nl-be": 379,
+	"./nl-be.js": 379,
+	"./nl.js": 378,
+	"./nn": 380,
+	"./nn.js": 380,
+	"./pa-in": 381,
+	"./pa-in.js": 381,
+	"./pl": 382,
+	"./pl.js": 382,
+	"./pt": 383,
+	"./pt-br": 384,
+	"./pt-br.js": 384,
+	"./pt.js": 383,
+	"./ro": 385,
+	"./ro.js": 385,
+	"./ru": 386,
+	"./ru.js": 386,
+	"./sd": 387,
+	"./sd.js": 387,
+	"./se": 388,
+	"./se.js": 388,
+	"./si": 389,
+	"./si.js": 389,
+	"./sk": 390,
+	"./sk.js": 390,
+	"./sl": 391,
+	"./sl.js": 391,
+	"./sq": 392,
+	"./sq.js": 392,
+	"./sr": 393,
+	"./sr-cyrl": 394,
+	"./sr-cyrl.js": 394,
+	"./sr.js": 393,
+	"./ss": 395,
+	"./ss.js": 395,
+	"./sv": 396,
+	"./sv.js": 396,
+	"./sw": 397,
+	"./sw.js": 397,
+	"./ta": 398,
+	"./ta.js": 398,
+	"./te": 399,
+	"./te.js": 399,
+	"./tet": 400,
+	"./tet.js": 400,
+	"./tg": 401,
+	"./tg.js": 401,
+	"./th": 402,
+	"./th.js": 402,
+	"./tl-ph": 403,
+	"./tl-ph.js": 403,
+	"./tlh": 404,
+	"./tlh.js": 404,
+	"./tr": 405,
+	"./tr.js": 405,
+	"./tzl": 406,
+	"./tzl.js": 406,
+	"./tzm": 407,
+	"./tzm-latn": 408,
+	"./tzm-latn.js": 408,
+	"./tzm.js": 407,
+	"./ug-cn": 409,
+	"./ug-cn.js": 409,
+	"./uk": 410,
+	"./uk.js": 410,
+	"./ur": 411,
+	"./ur.js": 411,
+	"./uz": 412,
+	"./uz-latn": 413,
+	"./uz-latn.js": 413,
+	"./uz.js": 412,
+	"./vi": 414,
+	"./vi.js": 414,
+	"./x-pseudo": 415,
+	"./x-pseudo.js": 415,
+	"./yo": 416,
+	"./yo.js": 416,
+	"./zh-cn": 417,
+	"./zh-cn.js": 417,
+	"./zh-hk": 418,
+	"./zh-hk.js": 418,
+	"./zh-tw": 419,
+	"./zh-tw.js": 419
 };
 function webpackContext(req) {
 	return __webpack_require__(webpackContextResolve(req));
@@ -1697,107 +1751,7 @@ webpackContext.id = 666;
 
 /***/ }),
 
-/***/ 703:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(464);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(465);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_firebase__ = __webpack_require__(81);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_firebase__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_login_login__ = __webpack_require__(140);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_main_main__ = __webpack_require__(92);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_settings_settings__ = __webpack_require__(167);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_statistics_statistics__ = __webpack_require__(168);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_personal_info_personal_info__ = __webpack_require__(143);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_call_call__ = __webpack_require__(165);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-
-
-
-
-
-
-var firebaseConfig = {
-    apiKey: "AIzaSyCGbCzagTiX3RZmGXYct2YaJSZQPMcziac",
-    authDomain: "alcometer-720c2.firebaseapp.com",
-    databaseURL: "https://alcometer-720c2.firebaseio.com",
-    projectId: "alcometer-720c2",
-    storageBucket: "alcometer-720c2.appspot.com",
-    messagingSenderId: "211742343446"
-};
-var MyApp = (function () {
-    function MyApp(platform, statusBar, splashScreen) {
-        var _this = this;
-        this.platform = platform;
-        this.statusBar = statusBar;
-        this.splashScreen = splashScreen;
-        // used for an example of ngFor and navigation
-        this.pages = [
-            { title: 'PersonalInfo', component: __WEBPACK_IMPORTED_MODULE_9__pages_personal_info_personal_info__["a" /* PersonalInfoPage */] },
-            { title: 'Main', component: __WEBPACK_IMPORTED_MODULE_6__pages_main_main__["a" /* MainPage */] },
-            { title: 'Settings', component: __WEBPACK_IMPORTED_MODULE_7__pages_settings_settings__["a" /* SettingsPage */] },
-            { title: 'Statistics', component: __WEBPACK_IMPORTED_MODULE_8__pages_statistics_statistics__["a" /* StatisticsPage */] },
-            { title: 'Call', component: __WEBPACK_IMPORTED_MODULE_10__pages_call_call__["a" /* CallPage */] }
-        ];
-        var unsubscribe = __WEBPACK_IMPORTED_MODULE_4_firebase___default.a.auth().onAuthStateChanged(function (user) {
-            if (!user) {
-                _this.rootPage = __WEBPACK_IMPORTED_MODULE_5__pages_login_login__["a" /* LoginPage */];
-                unsubscribe();
-            }
-            else {
-                _this.rootPage = __WEBPACK_IMPORTED_MODULE_6__pages_main_main__["a" /* MainPage */];
-                unsubscribe();
-            }
-        });
-    }
-    MyApp.prototype.initializeApp = function () {
-        var _this = this;
-        this.platform.ready().then(function () {
-            // Okay, so the platform is ready and our plugins are available.
-            // Here you can do any higher level native things you might need.
-            _this.statusBar.styleDefault();
-            _this.splashScreen.hide();
-        });
-    };
-    MyApp.prototype.openPage = function (page) {
-        // Reset the content nav to have just this page
-        // we wouldn't want the back button to show in this scenario
-        this.nav.setRoot(page.component);
-    };
-    __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Nav */]),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Nav */])
-    ], MyApp.prototype, "nav", void 0);
-    MyApp = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"C:\EA2017-2018\InternationalProject\IP18-AlcoMeter01\Alco\src\app\app.html"*/'<ion-menu [content]="content">\n\n  <ion-header>\n\n    <ion-toolbar>\n\n      <ion-title>Alcometer</ion-title>\n\n    </ion-toolbar>\n\n  </ion-header>\n\n  <ion-content>\n\n    <ion-list>\n\n      <button menuClose ion-item *ngFor="let p of pages" (click)= "openPage(p)">\n\n        {{p.title}}\n\n      </button>\n\n    </ion-list>\n\n  </ion-content>\n\n</ion-menu>\n\n\n\n<ion-nav id="nav" #content [root]="rootPage"></ion-nav>'/*ion-inline-end:"C:\EA2017-2018\InternationalProject\IP18-AlcoMeter01\Alco\src\app\app.html"*/
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
-    ], MyApp);
-    return MyApp;
-}());
-
-//# sourceMappingURL=app.component.js.map
-
-/***/ }),
-
-/***/ 91:
+/***/ 70:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1901,10 +1855,9 @@ var FirebaseProvider = (function () {
     };
     FirebaseProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_angularfire2_database__["a" /* AngularFireDatabase */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_angularfire2_database__["a" /* AngularFireDatabase */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__providers_authenticatie_authenticatie__["a" /* AuthenticatieProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_authenticatie_authenticatie__["a" /* AuthenticatieProvider */]) === "function" && _b || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_angularfire2_database__["a" /* AngularFireDatabase */], __WEBPACK_IMPORTED_MODULE_2__providers_authenticatie_authenticatie__["a" /* AuthenticatieProvider */]])
     ], FirebaseProvider);
     return FirebaseProvider;
-    var _a, _b;
 }());
 
 var snapshotToArray = function (snapshot) {
@@ -1920,6 +1873,106 @@ var snapshotToArray = function (snapshot) {
 
 /***/ }),
 
+/***/ 703:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(463);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(464);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_firebase__ = __webpack_require__(82);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_firebase__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_login_login__ = __webpack_require__(140);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_main_main__ = __webpack_require__(92);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_settings_settings__ = __webpack_require__(167);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_statistics_statistics__ = __webpack_require__(168);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_personal_info_personal_info__ = __webpack_require__(143);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_call_call__ = __webpack_require__(165);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+
+
+
+
+var firebaseConfig = {
+    apiKey: "AIzaSyCGbCzagTiX3RZmGXYct2YaJSZQPMcziac",
+    authDomain: "alcometer-720c2.firebaseapp.com",
+    databaseURL: "https://alcometer-720c2.firebaseio.com",
+    projectId: "alcometer-720c2",
+    storageBucket: "alcometer-720c2.appspot.com",
+    messagingSenderId: "211742343446"
+};
+var MyApp = (function () {
+    function MyApp(platform, statusBar, splashScreen) {
+        var _this = this;
+        this.platform = platform;
+        this.statusBar = statusBar;
+        this.splashScreen = splashScreen;
+        // used for an example of ngFor and navigation
+        this.pages = [
+            { title: 'PersonalInfo', component: __WEBPACK_IMPORTED_MODULE_9__pages_personal_info_personal_info__["a" /* PersonalInfoPage */] },
+            { title: 'Main', component: __WEBPACK_IMPORTED_MODULE_6__pages_main_main__["a" /* MainPage */] },
+            { title: 'Settings', component: __WEBPACK_IMPORTED_MODULE_7__pages_settings_settings__["a" /* SettingsPage */] },
+            { title: 'Statistics', component: __WEBPACK_IMPORTED_MODULE_8__pages_statistics_statistics__["a" /* StatisticsPage */] },
+            { title: 'Call', component: __WEBPACK_IMPORTED_MODULE_10__pages_call_call__["a" /* CallPage */] }
+        ];
+        var unsubscribe = __WEBPACK_IMPORTED_MODULE_4_firebase___default.a.auth().onAuthStateChanged(function (user) {
+            if (!user) {
+                _this.rootPage = __WEBPACK_IMPORTED_MODULE_5__pages_login_login__["a" /* LoginPage */];
+                unsubscribe();
+            }
+            else {
+                _this.rootPage = __WEBPACK_IMPORTED_MODULE_6__pages_main_main__["a" /* MainPage */];
+                unsubscribe();
+            }
+        });
+    }
+    MyApp.prototype.initializeApp = function () {
+        var _this = this;
+        this.platform.ready().then(function () {
+            // Okay, so the platform is ready and our plugins are available.
+            // Here you can do any higher level native things you might need.
+            _this.statusBar.styleDefault();
+            _this.splashScreen.hide();
+        });
+    };
+    MyApp.prototype.openPage = function (page) {
+        // Reset the content nav to have just this page
+        // we wouldn't want the back button to show in this scenario
+        this.nav.setRoot(page.component);
+    };
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Nav */]),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Nav */])
+    ], MyApp.prototype, "nav", void 0);
+    MyApp = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"C:\EA2017-2018\InternationalProject\IP18-AlcoMeter01\Alco\src\app\app.html"*/'<ion-menu [content]="content">\n\n  <ion-header>\n\n    <ion-toolbar>\n\n      <ion-title>Alcometer</ion-title>\n\n    </ion-toolbar>\n\n  </ion-header>\n\n  <ion-content>\n\n    <ion-list>\n\n      <button menuClose ion-item *ngFor="let p of pages" (click)= "openPage(p)">\n\n        {{p.title}}\n\n      </button>\n\n    </ion-list>\n\n  </ion-content>\n\n</ion-menu>\n\n\n\n<ion-nav id="nav" #content [root]="rootPage"></ion-nav>'/*ion-inline-end:"C:\EA2017-2018\InternationalProject\IP18-AlcoMeter01\Alco\src\app\app.html"*/
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
+    ], MyApp);
+    return MyApp;
+}());
+
+//# sourceMappingURL=app.component.js.map
+
+/***/ }),
+
 /***/ 92:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1928,9 +1981,9 @@ var snapshotToArray = function (snapshot) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_authenticatie_authenticatie__ = __webpack_require__(40);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_firebase_firebase__ = __webpack_require__(91);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_firebase_firebase__ = __webpack_require__(70);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_bluetooth_bluetooth__ = __webpack_require__(142);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_chart_js__ = __webpack_require__(291);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_chart_js__ = __webpack_require__(638);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_chart_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_chart_js__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1969,7 +2022,7 @@ var MainPage = (function () {
     };
     MainPage.prototype.onButtonClick = function () {
         //this.receiveData();
-        this.meting = 0.02;
+        this.meting = 0.8;
         this.fb.saveMeasurement(this.meting);
         this.donutChart = new __WEBPACK_IMPORTED_MODULE_5_chart_js__["Chart"](document.getElementById('donutChart'), {
             type: 'doughnut',
@@ -2010,15 +2063,14 @@ var MainPage = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-main',template:/*ion-inline-start:"C:\EA2017-2018\InternationalProject\IP18-AlcoMeter01\Alco\src\pages\main\main.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>Main</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n<button ion-button full round (click)="onButtonClick()">Click</button>\n\n<ion-label *ngIf="meting">{{meting}}</ion-label>\n\n<canvas id=\'donutChart\'></canvas>\n\n<button ion-button type="submit" (click)="logout()">Log out</button>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\EA2017-2018\InternationalProject\IP18-AlcoMeter01\Alco\src\pages\main\main.html"*/,
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__providers_firebase_firebase__["a" /* FirebaseProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_firebase_firebase__["a" /* FirebaseProvider */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__providers_authenticatie_authenticatie__["a" /* AuthenticatieProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_authenticatie_authenticatie__["a" /* AuthenticatieProvider */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_4__providers_bluetooth_bluetooth__["a" /* BluetoothProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__providers_bluetooth_bluetooth__["a" /* BluetoothProvider */]) === "function" && _e || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__providers_firebase_firebase__["a" /* FirebaseProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_authenticatie_authenticatie__["a" /* AuthenticatieProvider */], __WEBPACK_IMPORTED_MODULE_4__providers_bluetooth_bluetooth__["a" /* BluetoothProvider */]])
     ], MainPage);
     return MainPage;
-    var _a, _b, _c, _d, _e;
 }());
 
 //# sourceMappingURL=main.js.map
 
 /***/ })
 
-},[466]);
+},[465]);
 //# sourceMappingURL=main.js.map

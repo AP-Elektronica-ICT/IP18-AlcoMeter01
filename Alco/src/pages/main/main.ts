@@ -36,7 +36,7 @@ export class MainPage {
   public onButtonClick() {
 
     //this.receiveData();
-    this.meting = 0.02;
+    this.meting = 0.8;
     this.fb.saveMeasurement(this.meting);
     
     this.donutChart = new Chart(document.getElementById('donutChart'), {
