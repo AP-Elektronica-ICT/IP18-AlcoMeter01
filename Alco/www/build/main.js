@@ -1731,8 +1731,18 @@ webpackContext.id = 666;
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FirebaseProvider; });
 /* unused harmony export snapshotToArray */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_database__ = __webpack_require__(279);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_authenticatie_authenticatie__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(309);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(310);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_firebase__ = __webpack_require__(117);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_firebase__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_login_login__ = __webpack_require__(130);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_create_account_create_account__ = __webpack_require__(88);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_test_home_test_home__ = __webpack_require__(82);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_main_main__ = __webpack_require__(156);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_settings_settings__ = __webpack_require__(89);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_statistics_statistics__ = __webpack_require__(158);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_personal_info_personal_info__ = __webpack_require__(157);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1884,6 +1894,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var firebaseConfig = {
     apiKey: "AIzaSyCGbCzagTiX3RZmGXYct2YaJSZQPMcziac",
     authDomain: "alcometer-720c2.firebaseapp.com",
@@ -1900,10 +1911,12 @@ var MyApp = (function () {
         this.splashScreen = splashScreen;
         // used for an example of ngFor and navigation
         this.pages = [
-            { title: 'PersonalInfo', component: __WEBPACK_IMPORTED_MODULE_8__pages_personal_info_personal_info__["a" /* PersonalInfoPage */] },
-            { title: 'Main', component: __WEBPACK_IMPORTED_MODULE_5__pages_main_main__["a" /* MainPage */] },
-            { title: 'Settings', component: __WEBPACK_IMPORTED_MODULE_6__pages_settings_settings__["a" /* SettingsPage */] },
-            { title: 'Statistics', component: __WEBPACK_IMPORTED_MODULE_7__pages_statistics_statistics__["a" /* StatisticsPage */] },
+            { title: 'Login', component: __WEBPACK_IMPORTED_MODULE_5__pages_login_login__["a" /* LoginPage */] },
+            { title: 'Create Account', component: __WEBPACK_IMPORTED_MODULE_6__pages_create_account_create_account__["a" /* CreateAccountPage */] },
+            { title: 'PersonalInfo', component: __WEBPACK_IMPORTED_MODULE_11__pages_personal_info_personal_info__["a" /* PersonalInfoPage */] },
+            { title: 'Main', component: __WEBPACK_IMPORTED_MODULE_8__pages_main_main__["a" /* MainPage */] },
+            { title: 'Settings', component: __WEBPACK_IMPORTED_MODULE_9__pages_settings_settings__["a" /* SettingsPage */] },
+            { title: 'Statistics', component: __WEBPACK_IMPORTED_MODULE_10__pages_statistics_statistics__["a" /* StatisticsPage */] }
         ];
         var unsubscribe = __WEBPACK_IMPORTED_MODULE_4_firebase___default.a.auth().onAuthStateChanged(function (user) {
             if (!user) {

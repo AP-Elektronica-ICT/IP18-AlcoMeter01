@@ -42,6 +42,7 @@
   "call-number": {
     "source": {
       "type": "registry",
+<<<<<<< HEAD
       "id": "mx.ferreyra.callnumber@0.0.2"
     },
     "is_top_level": true,
@@ -50,6 +51,8 @@
   "cordova-plugin-bluetooth-serial": {
     "source": {
       "type": "registry",
+=======
+>>>>>>> bluetoothConnection
       "id": "cordova-plugin-bluetooth-serial"
     },
     "is_top_level": true,

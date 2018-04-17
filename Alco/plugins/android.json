@@ -7,9 +7,12 @@
     "files": {}
   },
   "installed_plugins": {
+<<<<<<< HEAD
     "call-number": {
       "PACKAGE_NAME": "be.whateverworks.alcometer"
     },
+=======
+>>>>>>> bluetoothConnection
     "cordova-plugin-bluetooth-serial": {
       "PACKAGE_NAME": "be.whateverworks.alcometer"
     },
@@ -29,5 +32,9 @@
       "PACKAGE_NAME": "be.whateverworks.alcometer"
     }
   },
-  "dependent_plugins": {}
+  "dependent_plugins": {
+    "call-number": {
+      "PACKAGE_NAME": "be.whateverworks.alcometer"
+    }
+  }
 }
