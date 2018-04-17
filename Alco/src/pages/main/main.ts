@@ -4,6 +4,8 @@ import { AuthenticatieProvider } from '../../providers/authenticatie/authenticat
 import { FirebaseProvider } from '../../providers/firebase/firebase';
 import { BluetoothProvider } from '../../providers/bluetooth/bluetooth';
 import { Chart } from 'chart.js';
+import { CallNumber } from '@ionic-native/call-number';
+
 /**
  * Generated class for the MainPage page.
  *
@@ -23,7 +25,7 @@ export class MainPage {
   total: number = 2;
   maxPromille: number = 0.5;
 
-  constructor(public fb: FirebaseProvider, public navCtrl: NavController, public navParams: NavParams, public afAuth: AuthenticatieProvider, public bt: BluetoothProvider) {
+  constructor(public fb: FirebaseProvider,private Noodnummer: CallNumber, public navCtrl: NavController, public navParams: NavParams, public afAuth: AuthenticatieProvider, public bt: BluetoothProvider) {
   }
 
   ionViewDidLoad() {
@@ -58,7 +60,12 @@ export class MainPage {
       
              });
   }
-
+  public Emergency() {
+    this.Noodnummer.callNumber("0495142810", true)
+    .then(() => console.log('Launched dialer!'))
+    .catch(() => console.log('Error launching dialer'));
+  
+    }
   logout(){
     this.afAuth.logOut();
     this.navCtrl.push('LoginPage');

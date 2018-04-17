@@ -3,7 +3,7 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { BluetoothSerial } from '@ionic-native/bluetooth-serial';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
-import { CallPage } from '../pages/call/call';
+
 import { CallNumber } from '@ionic-native/call-number';
 import { MyApp } from './app.component';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -50,7 +50,7 @@ firebase.initializeApp(firebaseConfig);
     CreateAccountPage,
     SettingsPage,
     StatisticsPage,
-    CallPage
+    
   ],
   imports: [
     BrowserModule,
@@ -80,7 +80,7 @@ firebase.initializeApp(firebaseConfig);
     SettingsPage,
     StatisticsPage,
     PersonalInfoPage,
-    CallPage
+    
   ],
   providers: [
     CallNumber,
