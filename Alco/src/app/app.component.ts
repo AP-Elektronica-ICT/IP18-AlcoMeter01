@@ -11,7 +11,7 @@ import { MainPage} from "../pages/main/main";
 import { SettingsPage } from "../pages/settings/settings";
 import { StatisticsPage } from "../pages/statistics/statistics";
 import { PersonalInfoPage } from "../pages/personal-info/personal-info";
-import { CallPage } from '../pages/call/call';
+
 
 
 
@@ -44,7 +44,7 @@ export class MyApp {
       { title: 'Main', component: MainPage },
       { title: 'Settings', component: SettingsPage },
       { title: 'Statistics', component: StatisticsPage },
-      {title: 'Call', component: CallPage }
+     
 
     ];
     const unsubscribe = firebase.auth().onAuthStateChanged( user => {
