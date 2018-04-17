@@ -34,9 +34,9 @@ userId: string;
     return this.angularfire.auth.sendPasswordResetEmail(email);
   }
 
-  getCurrentuserID(){
+  async getCurrentuserID(){
     
-    this.angularfire.authState.subscribe(user => {
+    await this.angularfire.authState.subscribe(user => {
       if(user) this.userId = user.uid;
       else this.userId = null;
       console.log("userId in authProvider: ", this.userId);
