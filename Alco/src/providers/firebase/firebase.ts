@@ -86,11 +86,29 @@ export class FirebaseProvider {
     });  
   }
 
-  saveMeasurement(meting){
+  saveMeasurement(resultaat){
+    var data = {
+      "promille":Number,
+      "beschrijving":String
+    }
+    data.promille = resultaat[0];
+    data.beschrijving = resultaat[1];
     this.auth.getCurrentuserID().then(id => {
-      this.afd.database.ref(`/meting/${id}/`).push(meting);
+      this.afd.database.ref(`/meting/${id}/`).push(data);
     });  
   }
+
+  async getMeasurements(){
+    var arr = [];
+    await this.auth.getCurrentuserID().then(id => {
+      this.afd.database.ref(`/meting/${id}/`).on('value', resp => {
+        arr = snapshotToArray(resp);
+        console.log("metingen in provider: ", arr);
+      });
+      
+    });
+    return arr;
+   }
 }
 
 export const snapshotToArray = snapshot => {
