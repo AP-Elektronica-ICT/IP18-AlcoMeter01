@@ -35,10 +35,10 @@ export class BluetoothProvider {
     })
   }
       
-  public async startScanning(){
+  public startScanning(){
     this.scanning = true;
     var i = 0;
-    await this.bluetoothSerial.setDeviceDiscoveredListener().forEach(
+    this.bluetoothSerial.setDeviceDiscoveredListener().forEach(
       device => {
         console.log(device.id);
         this.availableDevices[i] = device;

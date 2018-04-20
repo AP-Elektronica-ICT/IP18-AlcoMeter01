@@ -21,6 +21,8 @@ import { CallNumber } from '@ionic-native/call-number';
 export class MainPage {
 
   public meting: number;
+  public beschrijving:String = "Een lekkere mojito!";
+  resultaat  = [];
   donutChart:any;
   total: number = 2;
   maxPromille: number = 0.5;
@@ -38,8 +40,9 @@ export class MainPage {
   public onButtonClick() {
 
     //this.receiveData();
-    this.meting = 0.8;
-    this.fb.saveMeasurement(this.meting);
+    this.meting = 0.1;
+    this.resultaat= [this.meting, this.beschrijving];
+    this.fb.saveMeasurement(this.resultaat);
     
     this.donutChart = new Chart(document.getElementById('donutChart'), {
       
