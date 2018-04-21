@@ -27,7 +27,7 @@ export class BluetoothProvider {
   }
      
   public async connectMAC(device: any){
-    await this.bluetoothSerial.connect(device.id).subscribe((rspo)=>{
+    this.bluetoothSerial.connect(device.id).subscribe((rspo)=>{
       console.log("connected to HC-06 device", rspo);
       this.connectedDevice = device;
     }, (error) => {
@@ -35,7 +35,7 @@ export class BluetoothProvider {
     })
   }
       
-  public startScanning(){
+  public async startScanning(){
     this.scanning = true;
     var i = 0;
     this.bluetoothSerial.setDeviceDiscoveredListener().forEach(

@@ -334,31 +334,33 @@ var BluetoothProvider = (function () {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.bluetoothSerial.connect(device.id).subscribe(function (rspo) {
-                            console.log("connected to HC-06 device", rspo);
-                            _this.connectedDevice = device;
-                        }, function (error) {
-                            console.log("error", error);
-                        })];
-                    case 1:
-                        _a.sent();
-                        return [2 /*return*/];
-                }
+                this.bluetoothSerial.connect(device.id).subscribe(function (rspo) {
+                    console.log("connected to HC-06 device", rspo);
+                    _this.connectedDevice = device;
+                }, function (error) {
+                    console.log("error", error);
+                });
+                return [2 /*return*/];
             });
         });
     };
     BluetoothProvider.prototype.startScanning = function () {
-        var _this = this;
-        this.scanning = true;
-        var i = 0;
-        this.bluetoothSerial.setDeviceDiscoveredListener().forEach(function (device) {
-            console.log(device.id);
-            _this.availableDevices[i] = device;
-            console.log("unpaired devices: " + _this.availableDevices[i].name);
-            i++;
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            var i;
+            return __generator(this, function (_a) {
+                this.scanning = true;
+                i = 0;
+                this.bluetoothSerial.setDeviceDiscoveredListener().forEach(function (device) {
+                    console.log(device.id);
+                    _this.availableDevices[i] = device;
+                    console.log("unpaired devices: " + _this.availableDevices[i].name);
+                    i++;
+                });
+                this.bluetoothSerial.discoverUnpaired();
+                return [2 /*return*/];
+            });
         });
-        this.bluetoothSerial.discoverUnpaired();
     };
     BluetoothProvider.prototype.selectDevice = function (device) {
         var _this = this;
@@ -418,9 +420,10 @@ var BluetoothProvider = (function () {
     };
     BluetoothProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__ionic_native_bluetooth_serial__["a" /* BluetoothSerial */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__ionic_native_bluetooth_serial__["a" /* BluetoothSerial */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__ionic_native_bluetooth_serial__["a" /* BluetoothSerial */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */]) === "function" && _b || Object])
     ], BluetoothProvider);
     return BluetoothProvider;
+    var _a, _b;
 }());
 
 //# sourceMappingURL=bluetooth.js.map
@@ -933,7 +936,7 @@ var StatisticsPage = (function () {
                     _this.lineChart = new __WEBPACK_IMPORTED_MODULE_2_chart_js__["Chart"](document.getElementById('lineChart'), {
                         type: 'line',
                         data: {
-                            labels: ["January", "February", "March", "April", "May", "June", "July"],
+                            labels: beschrijving,
                             datasets: [
                                 {
                                     label: "Alcohol promille",

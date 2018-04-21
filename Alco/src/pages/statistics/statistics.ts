@@ -28,6 +28,7 @@ export class StatisticsPage {
     loading.present();
     this.showChart(loading);
   }
+  
   async showChart(loading: Loading){
     var promille = [];
     var beschrijving = [];
@@ -45,7 +46,7 @@ export class StatisticsPage {
   
         type: 'line',
         data: {
-            labels: ["January", "February", "March", "April", "May", "June", "July"],
+            labels:beschrijving,
             datasets: [
                 {
                     label: "Alcohol promille",
