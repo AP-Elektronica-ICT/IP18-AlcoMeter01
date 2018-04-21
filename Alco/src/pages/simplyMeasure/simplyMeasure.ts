@@ -25,15 +25,14 @@ export class SimplyMeasurePage {
   donutChart:any;
   total: number = 2;
   maxPromille: number = 0.5;
+  public connectedDevice: any;
+  public availableDevices: any[] = [];
 
-  constructor(public bt: BluetoothProvider, public navCtrl: NavController, public navParams: NavParams) {
+  constructor( public bt: BluetoothProvider, public navCtrl: NavController, public navParams: NavParams) {
 
   }
 
-
-
   ionViewDidLoad() {
-
 
    }
 
@@ -62,6 +61,21 @@ export class SimplyMeasurePage {
                  }
       
              });
+  }
+
+  async startScanning(){
+      this.bt.startScanning();
+      this.availableDevices = this.bt.availableDevices;
+    
+  }
+
+  disconnect(){
+    this.bt.disconnect();
+  }
+
+  selectDevice(device){
+    this.bt.selectDevice(device);
+    this.connectedDevice = this.bt.connectedDevice;
   }
 
 

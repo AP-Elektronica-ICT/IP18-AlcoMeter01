@@ -33,7 +33,7 @@ export class SettingsPage {
     const loading: Loading = this.loadingCtrl.create();
     loading.present();
     try{
-      await this.fb.saveSettings(this.settingsForm.value.emergencyNumber, this.settingsForm.value.country)
+      await this.fb.saveSettings(this.settingsForm.value.emergencyNumber, this.settingsForm.value.country);
       loading.dismiss();
       const alert = this.alert.create({
         message: "Changes saved succesfully",
