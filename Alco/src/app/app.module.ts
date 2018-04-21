@@ -17,8 +17,8 @@ import { LoginPage } from '../pages/login/login';
 import { LoginPageModule } from '../pages/login/login.module';
 import { CreateAccountPage } from '../pages/create-account/create-account';
 import { AuthenticatieProvider } from '../providers/authenticatie/authenticatie';
-import { TestHomePage } from '../pages/test-home/test-home';
-import { TestHomePageModule } from '../pages/test-home/test-home.module';
+import { SimplyMeasurePage } from '../pages/simplyMeasure/simplyMeasure';
+import { SimplyMeasurePageModule } from '../pages/simplyMeasure/simplyMeasure.module';
 import * as firebase from 'firebase';
 import { ResetPasswordPageModule } from '../pages/reset-password/reset-password.module';
 import { ResetPasswordPage } from '../pages/reset-password/reset-password';
@@ -63,7 +63,7 @@ firebase.initializeApp(firebaseConfig);
     LoginPageModule,
     HttpModule,
     AngularFireDatabaseModule,
-    TestHomePageModule,
+    SimplyMeasurePageModule,
     ResetPasswordPageModule,
     MainPageModule,
     PersonalInfoPageModule
@@ -73,7 +73,7 @@ firebase.initializeApp(firebaseConfig);
   entryComponents: [
     MyApp,
     LoginPage,
-    TestHomePage,
+    SimplyMeasurePage,
     CreateAccountPage,
     ResetPasswordPage,
     MainPage,

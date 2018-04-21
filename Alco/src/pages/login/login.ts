@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, Loading, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, Loading, LoadingController, MenuController } from 'ionic-angular';
 import { User } from '../../models/user';
 import {CreateAccountPage } from './../create-account/create-account';
 import {ResetPasswordPage} from './../reset-password/reset-password';
 import { MainPage } from '../main/main';
-import { AuthenticatieProvider } from '../../providers/authenticatie/authenticatie'
+import { SimplyMeasurePage } from '../simplyMeasure/simplyMeasure';
+import { AuthenticatieProvider } from '../../providers/authenticatie/authenticatie';
 
 /**
  * Generated class for the LoginPage page.
@@ -22,8 +23,10 @@ export class LoginPage {
 
   user = {} as User;
 
-  constructor(private loadingCtrl: LoadingController, private afAuth: AuthenticatieProvider, public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController) {
-
+  constructor(private loadingCtrl: LoadingController, private afAuth: AuthenticatieProvider, public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController,
+    public menuCtrl: MenuController) {
+    this.menuCtrl.enable(false, 'menu');
+      
   }
 
   ionViewDidLoad() {
@@ -53,6 +56,11 @@ export class LoginPage {
 
   resetPassword(){
     this.navCtrl.push(ResetPasswordPage);
+  }
+
+  simplyMeasure(){
+    this.navCtrl.push(SimplyMeasurePage);
+    this.menuCtrl.enable(false, 'menu');
   }
 
 }

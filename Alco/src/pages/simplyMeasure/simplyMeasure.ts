@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
-import { AuthenticatieProvider } from '../../providers/authenticatie/authenticatie';
-import { FirebaseProvider } from '../../providers/firebase/firebase';
-import { BluetoothProvider } from '../../providers/bluetooth/bluetooth';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { AuthenticatieProvider} from '../../providers/authenticatie/authenticatie';
+import { BluetoothProvider} from '../../providers/bluetooth/bluetooth';
 import { Chart } from 'chart.js';
-import { CallNumber } from '@ionic-native/call-number';
 
 /**
- * Generated class for the MainPage page.
+ * Generated class for the TestHomePage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -15,10 +14,10 @@ import { CallNumber } from '@ionic-native/call-number';
 
 @IonicPage()
 @Component({
-  selector: 'page-main',
-  templateUrl: 'main.html',
+  selector: 'page-simply-measure',
+  templateUrl: 'simplyMeasure.html',
 })
-export class MainPage {
+export class SimplyMeasurePage {
 
   public meting: number;
   public beschrijving:String = "Een lekkere mojito!";
@@ -27,25 +26,24 @@ export class MainPage {
   total: number = 2;
   maxPromille: number = 0.5;
 
-  constructor(private menuCtrl: MenuController, public fb: FirebaseProvider,private Noodnummer: CallNumber, public navCtrl: NavController, public navParams: NavParams, public afAuth: AuthenticatieProvider, public bt: BluetoothProvider) {
-    this.menuCtrl.enable(true, 'menu');
+  constructor(public bt: BluetoothProvider, public navCtrl: NavController, public navParams: NavParams) {
+
   }
+
+
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad MainPage');
- 
-  }
 
 
-  public buttonClicked: boolean = false; //Whatever you want to initialise it as
+   }
 
-  public onButtonClick() {
+   public onButtonClick() {
 
     //this.receiveData();
-    this.meting = 1.12;
+    this.meting = 0.12;
+    this.total = 2;
     this.resultaat= [this.meting, this.beschrijving];
-    this.fb.saveMeasurement(this.resultaat);
-    
+        
     this.donutChart = new Chart(document.getElementById('donutChart'), {
       
                  type: 'doughnut',
@@ -65,12 +63,7 @@ export class MainPage {
       
              });
   }
-  public Emergency() {
-    this.Noodnummer.callNumber("0495142810", true)
-    .then(() => console.log('Launched dialer!'))
-    .catch(() => console.log('Error launching dialer'));
-  
-    }
+
 
   private receiveData(){
     this.bt.receiveData();

@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Loading, LoadingController, AlertController } from 'ionic-angular';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AuthenticatieProvider } from '../../providers/authenticatie/authenticatie';
-import { TestHomePage } from '../test-home/test-home';
 
 
 @IonicPage({name: 'page-reset-password'})

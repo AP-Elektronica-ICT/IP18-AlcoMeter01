@@ -5,7 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import firebase from 'firebase';
 import { LoginPage } from '../pages/login/login';
 import { CreateAccountPage } from '../pages/create-account/create-account';
-import { TestHomePage } from '../pages/test-home/test-home';
+import { SimplyMeasurePage } from '../pages/simplyMeasure/simplyMeasure';
 import { ResetPasswordPage } from "../pages/reset-password/reset-password";
 import { MainPage} from "../pages/main/main";
 import { SettingsPage } from "../pages/settings/settings";
