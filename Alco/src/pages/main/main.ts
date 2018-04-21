@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, AlertController } from 'ionic-angular';
 import { AuthenticatieProvider } from '../../providers/authenticatie/authenticatie';
 import { FirebaseProvider } from '../../providers/firebase/firebase';
 import { BluetoothProvider } from '../../providers/bluetooth/bluetooth';
@@ -27,7 +27,7 @@ export class MainPage {
   total: number = 2;
   maxPromille: number = 0.5;
 
-  constructor(private menuCtrl: MenuController, public fb: FirebaseProvider,private Noodnummer: CallNumber, public navCtrl: NavController, public navParams: NavParams, public afAuth: AuthenticatieProvider, public bt: BluetoothProvider) {
+  constructor(public alertCtrl: AlertController, private menuCtrl: MenuController, public fb: FirebaseProvider,private Noodnummer: CallNumber, public navCtrl: NavController, public navParams: NavParams, public afAuth: AuthenticatieProvider, public bt: BluetoothProvider) {
     this.menuCtrl.enable(true, 'menu');
   }
 
@@ -68,7 +68,14 @@ export class MainPage {
   public Emergency() {
     this.Noodnummer.callNumber("0495142810", true)
     .then(() => console.log('Launched dialer!'))
-    .catch(() => console.log('Error launching dialer'));
+    .catch(() => {
+      console.log('Error launching dialer')
+      const alert = this.alertCtrl.create({
+        message: 'Error launching dialer',
+        buttons: [{text: 'Ok', role: 'cancel'}]
+      });
+      alert.present();
+    });
   
     }
 

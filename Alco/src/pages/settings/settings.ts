@@ -20,8 +20,8 @@ export class SettingsPage {
 
   constructor(private alert: AlertController,private loadingCtrl: LoadingController, private formBuilder: FormBuilder, public bt: BluetoothProvider, public navCtrl: NavController, public navParams: NavParams, private fb: FirebaseProvider) {
     this.settingsForm = formBuilder.group({
-      emergencyNumber:['', Validators.pattern('[0-9]*')],
-      country:['']
+      emergencyNumber:['', Validators.compose([Validators.pattern('[0-9]*'), Validators.required])],
+      country:['', Validators.required]
     });
     
     this.getSettings();
