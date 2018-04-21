@@ -28,6 +28,7 @@ export class FirebaseProvider {
       profile.email=arr[2];
       console.log("profile in provider: ", profile);
     });
+
     return profile;
   }
 

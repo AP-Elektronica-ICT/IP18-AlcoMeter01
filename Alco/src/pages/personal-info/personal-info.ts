@@ -35,11 +35,6 @@ export class PersonalInfoPage {
     console.log('ionViewDidLoad PersonalInfoPage');
   }
 
-  logout(){
-    this.afAuth.logOut();
-    this.navCtrl.push('LoginPage');
-  }
-
   async changeUser(loading: Loading){
     try {
       await this.fb.saveUserprofile(this.changeAccountForm.value.email, this.changeAccountForm.value.password, this.changeAccountForm.value.country, this.changeAccountForm.value.dateOfBirth);

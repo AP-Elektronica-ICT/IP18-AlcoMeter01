@@ -7,6 +7,9 @@
 <ion-header>
 
   <ion-navbar>
+      <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+      </button>
     <ion-title>personalInfo</ion-title>
   </ion-navbar>
 
@@ -14,9 +17,7 @@
 
 
 <ion-content padding>
-    <button ion-button type="submit" (click)="logout()">Log out</button>
-
-  <form [formGroup]="changeAccountForm" (submit)="presentPrompt()">
+   <form [formGroup]="changeAccountForm" (submit)="presentPrompt()">
     <ion-list style="position:absolute; top:10%; left:20%;">
       <ion-item>
         <ion-label floating>Email</ion-label>

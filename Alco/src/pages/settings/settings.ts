@@ -24,7 +24,7 @@ export class SettingsPage {
     });
     
     this.fb.getSettings();
-    console.log("profile in settingspage: ", this.fb.getSettings());
+    console.log("settings in settingspage: ", this.fb.getSettings());
     
   }
 

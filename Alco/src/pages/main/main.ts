@@ -69,10 +69,6 @@ export class MainPage {
     .catch(() => console.log('Error launching dialer'));
   
     }
-  logout(){
-    this.afAuth.logOut();
-    this.navCtrl.push('LoginPage');
-  }
 
   private receiveData(){
     this.bt.receiveData();
