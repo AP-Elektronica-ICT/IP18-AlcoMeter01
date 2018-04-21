@@ -33,7 +33,7 @@ export class StatisticsPage {
     var promille = [];
     var beschrijving = [];
 
-    this.fb.getMeasurements().then(meting => {
+    await this.fb.getMeasurements().then(meting => {
 
       meting.forEach(element => {
         promille.push(element.promille);
@@ -50,31 +50,39 @@ export class StatisticsPage {
             datasets: [
                 {
                     label: "Alcohol promille",
-                    fill: true,
-                    lineTension: 0.1,
-                    backgroundColor: "rgba(75,192,192,0.4)",
+                    backgroundColor: "rgba(75,192,192,0.0)",
                     borderColor: "rgba(75,192,192,1)",
-                    borderCapStyle: 'butt',
-                    borderDash: [],
-                    borderDashOffset: 0.0,
-                    borderJoinStyle: 'miter',
-                    pointBorderColor: "rgba(75,192,192,1)",
-                    pointBackgroundColor: "#fff",
-                    pointBorderWidth: 1,
-                    pointHoverRadius: 5,
-                    pointHoverBackgroundColor: "rgba(75,192,192,1)",
-                    pointHoverBorderColor: "rgba(220,220,220,1)",
-                    pointHoverBorderWidth: 2,
-                    pointRadius: 1,
+                    borderWidth: 2,
+                    pointRadius: 3,
+                    pointhoverRadius: 5,
+                    pointHoverBackgroundColor: 'rgb(255, 204, 0)',
+                    pointBackgroundColor: 'white',
                     pointHitRadius: 10,
-                    data: promille,
-                    spanGaps: false,
+                    spanGaps: true,
+                    lineTension: 0.3,
+                    data: promille
                 }
             ]
+        },
+        options: {
+          legend: {
+            display: false
+          },
+          scales: {
+            xAxes: [{
+              gridLines: {
+                display: false
+              },
+              ticks: {
+                display: false
+              }
+            }]
+            
+          }
         }
   
       });
-    })
+    });
       
   }
 }
