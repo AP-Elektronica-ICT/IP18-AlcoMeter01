@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Loading, LoadingController, AlertController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
 import { AuthenticatieProvider } from '../../providers/authenticatie/authenticatie';
-import { TestHomePage } from '../test-home/test-home';
+import { MainPage } from '../main/main';
 import { Subscription } from 'rxjs/Subscription';
 
 /**
@@ -56,7 +56,7 @@ export class CreateAccountPage {
         await this.authProvider.CreateNewUser(this.createAccountForm.value.email, this.createAccountForm.value.password, this.createAccountForm.value.country, this.createAccountForm.value.dateOfBirth)
         .then(()=>{
           loading.dismiss();
-          this.navCtrl.setRoot(TestHomePage);
+          this.navCtrl.setRoot(MainPage);
         });
       } catch(error){
           loading.dismiss();

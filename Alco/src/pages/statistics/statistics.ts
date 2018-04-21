@@ -74,8 +74,14 @@ export class StatisticsPage {
                 display: false
               },
               ticks: {
-                display: false
+                display: false,
               }
+            }],
+            yAxes: [{
+              ticks: {
+                beginAtZero:true
+              },
+              
             }]
             
           }

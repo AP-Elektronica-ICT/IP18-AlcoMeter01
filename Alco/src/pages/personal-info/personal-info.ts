@@ -20,6 +20,8 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class PersonalInfoPage {
 
+  profile: any;
+
   changeAccountForm: FormGroup;
   constructor(private loadingCtrl: LoadingController, private alert: AlertController, public navCtrl: NavController, public navParams: NavParams, formBuilder: FormBuilder, private fb: FirebaseProvider, private afAuth: AuthenticatieProvider) {
     this.changeAccountForm = formBuilder.group({
@@ -33,6 +35,8 @@ export class PersonalInfoPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PersonalInfoPage');
+
+    this.getProfile();
   }
 
   async changeUser(loading: Loading){
@@ -97,6 +101,13 @@ export class PersonalInfoPage {
       ]
     });
     alert.present();
+  }
+
+  async getProfile(){
+    await this.fb.getUserProfile().then(value => {
+      this.profile = value;
+    });
+    console.log("profile in profilePage: ", this.profile);
   }
 }
 

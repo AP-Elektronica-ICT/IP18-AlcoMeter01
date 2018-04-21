@@ -40,7 +40,7 @@ export class MainPage {
   public onButtonClick() {
 
     //this.receiveData();
-    this.meting = 0.1;
+    this.meting = 1.12;
     this.resultaat= [this.meting, this.beschrijving];
     this.fb.saveMeasurement(this.resultaat);
     
