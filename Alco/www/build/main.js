@@ -425,10 +425,8 @@ var PersonalInfoPage = (function () {
             country: [''],
             dateOfBirth: ['']
         });
+        this.fb.getUserProfile();
     }
-    PersonalInfoPage.prototype.showData = function () {
-        this.email = this.fb.getUserProfile.name;
-    };
     PersonalInfoPage.prototype.ionViewDidLoad = function () {
         console.log('ionViewDidLoad PersonalInfoPage');
         this.getProfile();

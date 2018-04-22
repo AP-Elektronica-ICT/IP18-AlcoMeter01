@@ -33,12 +33,9 @@ export class PersonalInfoPage {
       country:[''],
       dateOfBirth:['']
     });
-
+    this.fb.getUserProfile();
   }
   
-showData(){
-  this.email = this.fb.getUserProfile.name;
-}
   
 
   ionViewDidLoad() {
