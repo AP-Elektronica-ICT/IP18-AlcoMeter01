@@ -20,6 +20,10 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class PersonalInfoPage {
 
+  profile: any;
+  email:string= "";
+  
+
   changeAccountForm: FormGroup;
   constructor(private loadingCtrl: LoadingController, private alert: AlertController, public navCtrl: NavController, public navParams: NavParams, formBuilder: FormBuilder, private fb: FirebaseProvider, private afAuth: AuthenticatieProvider) {
     this.changeAccountForm = formBuilder.group({
@@ -29,15 +33,18 @@ export class PersonalInfoPage {
       country:[''],
       dateOfBirth:['']
     });
+
   }
+  
+showData(){
+  this.email = this.fb.getUserProfile.name;
+}
+  
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PersonalInfoPage');
-  }
 
-  logout(){
-    this.afAuth.logOut();
-    this.navCtrl.push('LoginPage');
+    this.getProfile();
   }
 
   async changeUser(loading: Loading){
@@ -102,6 +109,13 @@ export class PersonalInfoPage {
       ]
     });
     alert.present();
+  }
+
+  async getProfile(){
+    await this.fb.getUserProfile().then(value => {
+      this.profile = value;
+    });
+    console.log("profile in profilePage: ", this.profile);
   }
 }
 

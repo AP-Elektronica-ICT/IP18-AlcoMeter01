@@ -5,12 +5,14 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import firebase from 'firebase';
 import { LoginPage } from '../pages/login/login';
 import { CreateAccountPage } from '../pages/create-account/create-account';
-import { TestHomePage } from '../pages/test-home/test-home';
+import { SimplyMeasurePage } from '../pages/simplyMeasure/simplyMeasure';
 import { ResetPasswordPage } from "../pages/reset-password/reset-password";
 import { MainPage} from "../pages/main/main";
 import { SettingsPage } from "../pages/settings/settings";
 import { StatisticsPage } from "../pages/statistics/statistics";
 import { PersonalInfoPage } from "../pages/personal-info/personal-info";
+import { FirebaseProvider } from "./../providers/firebase/firebase";
+import { AuthenticatieProvider } from "./../providers/authenticatie/authenticatie";
 
 
 
@@ -35,7 +37,7 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public fb: FirebaseProvider, public Auth: AuthenticatieProvider) {
 
     // used for an example of ngFor and navigation
     this.pages = [
@@ -47,6 +49,8 @@ export class MyApp {
      
 
     ];
+
+    
     const unsubscribe = firebase.auth().onAuthStateChanged( user => {
       if (!user) {
         this.rootPage = LoginPage;
@@ -66,6 +70,11 @@ export class MyApp {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
+  }
+
+  logout(){
+    this.Auth.logOut();
+    this.nav.setRoot(LoginPage);
   }
 
   openPage(page) {

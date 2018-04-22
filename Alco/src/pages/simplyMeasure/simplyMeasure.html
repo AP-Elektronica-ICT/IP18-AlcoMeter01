@@ -1,0 +1,37 @@
+<!--
+  Generated template for the TestHomePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Measure</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+
+  <button ion-button full round (click)="onButtonClick()">Click</button>
+  <ion-label *ngIf="meting">{{meting}}</ion-label>
+  <canvas id='donutChart'></canvas>
+
+  <button ion-button block (click)="startScanning()">scan</button>
+    <ion-list-header>
+      availlable Devices
+    </ion-list-header>
+    <ion-item *ngFor='let device of availableDevices'>
+      <span (click)="selectDevice(device)">
+        {{device.name}}
+      </span>
+    </ion-item>
+    <button ion-button block (click)="disconnect()">Disconnect</button>
+    <ion-list-header>
+      Connected Device
+    </ion-list-header>
+    <ion-item *ngIf="connectedDevice">
+      {{connectedDevice.name}}
+    </ion-item>
+</ion-content>

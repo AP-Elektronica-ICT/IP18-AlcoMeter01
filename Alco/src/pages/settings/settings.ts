@@ -1,7 +1,7 @@
 import { Component, transition } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,Loading, LoadingController, AlertController } from 'ionic-angular';
 import { BluetoothProvider } from '../../providers/bluetooth/bluetooth';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FirebaseProvider} from '../../providers/firebase/firebase'
 
 
@@ -15,21 +15,39 @@ export class SettingsPage {
   public settingsForm: FormGroup;
   public connectedDevice: any;
   public availableDevices: any[] = [];
+  public settings: any;
   
 
-  constructor(private formBuilder: FormBuilder, public bt: BluetoothProvider, public navCtrl: NavController, public navParams: NavParams, private fb: FirebaseProvider) {
+  constructor(private alert: AlertController,private loadingCtrl: LoadingController, private formBuilder: FormBuilder, public bt: BluetoothProvider, public navCtrl: NavController, public navParams: NavParams, private fb: FirebaseProvider) {
     this.settingsForm = formBuilder.group({
-      emergencyNumber:[''],
-      country:['']
+      emergencyNumber:['', Validators.compose([Validators.pattern('[0-9]*'), Validators.required])],
+      country:['', Validators.required]
     });
     
-    this.fb.getSettings();
-    console.log("profile in settingspage: ", this.fb.getSettings());
+    this.getSettings();
+    
     
   }
 
-  save(){
-    this.fb.saveSettings(this.settingsForm.value.emergencyNumber, this.settingsForm.value.country);
+  async save(){
+    const loading: Loading = this.loadingCtrl.create();
+    loading.present();
+    try{
+      await this.fb.saveSettings(this.settingsForm.value.emergencyNumber, this.settingsForm.value.country);
+      loading.dismiss();
+      const alert = this.alert.create({
+        message: "Changes saved succesfully",
+        buttons: [{text: 'Ok', role: 'cancel'}]
+      });
+      alert.present();
+    }catch(error){
+      loading.dismiss();
+      const alert = this.alert.create({
+        message: error.message,
+        buttons: [{text: 'Ok', role: 'cancel'}]
+      });
+      alert.present();
+    }
   }
 
   startScanning(){
@@ -46,6 +64,16 @@ export class SettingsPage {
     this.connectedDevice = this.bt.connectedDevice;
   }
 
+  async getSettings(){
+    const loading: Loading = this.loadingCtrl.create();
+    loading.present();
+
+    await this.fb.getSettings().then(value => {
+      this.settings = value;
+      loading.dismiss();
+    });
+    console.log("settings in settingspage: ", this.settings);
+  }
 
 }
 

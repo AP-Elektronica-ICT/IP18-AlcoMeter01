@@ -27,7 +27,7 @@ export class BluetoothProvider {
   }
      
   public async connectMAC(device: any){
-    await this.bluetoothSerial.connect(device.id).subscribe((rspo)=>{
+    this.bluetoothSerial.connect(device.id).subscribe((rspo)=>{
       console.log("connected to HC-06 device", rspo);
       this.connectedDevice = device;
     }, (error) => {
@@ -35,17 +35,25 @@ export class BluetoothProvider {
     })
   }
       
-  public startScanning(){
-    this.scanning = true;
-    var i = 0;
-    this.bluetoothSerial.setDeviceDiscoveredListener().forEach(
-      device => {
-        console.log(device.id);
-        this.availableDevices[i] = device;
-        console.log("unpaired devices: " + this.availableDevices[i].name);
-        i++;
-  });
-    this.bluetoothSerial.discoverUnpaired();
+  public async startScanning(){
+    try{
+      this.scanning = true;
+      var i = 0;
+      await this.bluetoothSerial.setDeviceDiscoveredListener().forEach(
+        device => {
+          console.log(device.id);
+          this.availableDevices[i] = device;
+          console.log("unpaired devices: " + this.availableDevices[i].name);
+          i++;
+    });
+      this.bluetoothSerial.discoverUnpaired();
+    }catch(error){
+      const alert = this.alertCtrl.create({
+        message: error + " -> Bluetooth Not Available",
+        buttons: [{text: 'Ok', role: 'cancel'}]
+      });
+      alert.present();
+    }
   }
   
   

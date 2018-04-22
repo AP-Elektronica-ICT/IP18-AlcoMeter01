@@ -12,26 +12,29 @@ export class FirebaseProvider {
 
   constructor(public afd: AngularFireDatabase, public auth: AuthenticatieProvider) {}
 
-  getUserProfile() {
+  //user profile
+  async getUserProfile() {
     var arr = [];
     var profile = {
       "country": String,
       "dateOfBirth": Date,
       "email": String
     }
-    var id = this.auth.getCurrentuserID();
-    console.log("userId in firebaseProvider: ", id);
+    await this.auth.getCurrentuserID().then(id => {
+      console.log("userId in firebaseProvider: ", id);
     this.afd.database.ref(`/userProfile/${id}/`).on('value', resp =>{
       arr = snapshotToArray(resp);
       profile.country=arr[0];
       profile.dateOfBirth=arr[1];
       profile.email=arr[2];
       console.log("profile in provider: ", profile);
+      
+      });
     });
     return profile;
   }
 
-  saveUserprofile(email, password, country, dateOfBirth){
+  async saveUserprofile(email, password, country, dateOfBirth){
     this.auth.getCurrentuserID().then(id => {
       this.afd.database.ref(`/userProfile/${id}`).update({ email: email, country:country, dateOfBirth:dateOfBirth});
     });
@@ -60,22 +63,25 @@ export class FirebaseProvider {
     }
   }
 
-  getSettings(){
+  //app settings
+  async getSettings(){
     var arr = [];
     var settings = {
       "country": String,
       "emergencyNumber": Date
     }
-    this.auth.getCurrentuserID().then( id => {
+    
+    await this.auth.getCurrentuserID().then( id => {
       console.log("userId in firebaseProvider: ", id);
-    this.afd.database.ref(`/settings/${id}/`).on('value', resp =>{
-      arr = snapshotToArray(resp);
-      settings.country=arr[0];
-      settings.emergencyNumber=arr[1];
-      console.log("settings in provider: ", settings);
+
+      this.afd.database.ref(`/settings/${id}/`).on('value', resp =>{
+        arr = snapshotToArray(resp);
+        settings.country=arr[0];
+        settings.emergencyNumber=arr[1];
+        console.log("settings in provider: ", settings);
+      });
     });
     return settings;
-    });
   }
  
   saveSettings(emergencyNumber, country) {
@@ -86,6 +92,7 @@ export class FirebaseProvider {
     });  
   }
 
+  //measurement
   saveMeasurement(resultaat){
     var data = {
       "promille":Number,
@@ -104,19 +111,19 @@ export class FirebaseProvider {
       this.afd.database.ref(`/meting/${id}/`).on('value', resp => {
         arr = snapshotToArray(resp);
         console.log("metingen in provider: ", arr);
-      });
-      
+      });  
     });
     return arr;
    }
 }
 
+//get data from datatbase
 export const snapshotToArray = snapshot => {
   let returnArr = [];
   snapshot.forEach(childSnapshot => {
     let item = childSnapshot.val();
     returnArr.push(item);
   });
-  //console.log(returnArr);
+  console.log(returnArr);
   return returnArr;
 }

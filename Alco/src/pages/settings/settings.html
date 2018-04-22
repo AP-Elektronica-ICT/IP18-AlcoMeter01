@@ -43,21 +43,12 @@
         <ion-label>Current country</ion-label>
         <ion-select formControlName="country">
           <ion-option value="België">België</ion-option>
-          <ion-option value="Suomi">Suomi</ion-option>
-          <ion-option value="Deutschland">Deutschland</ion-option>
-          <ion-option value="Nederland">Nederland</ion-option>
-          <ion-option value="France">France</ion-option>
-          <ion-option value="Lëtzebuerg">Lëtzebuerg</ion-option>
-          <ion-option value="Portugal">Portugal</ion-option>
-          <ion-option value="Sverige">Sverige</ion-option>
-          <ion-option value="Great Britian">Great Britian</ion-option>
-          <ion-option value="România">România</ion-option>
-          <ion-option value="Italia">Italia</ion-option>
+          <ion-option value="Finland">Finland</ion-option>
         </ion-select>
       </ion-item>
     
     
-      <button type="submit"  style=" background-color:lightblue; width:100%" ion-button>Save</button>
+      <button type="submit"  style=" background-color:lightblue; width:100%" ion-button [disabled]="!settingsForm.valid">Save</button>
       </ion-list>
     </form>
   </ion-list>
