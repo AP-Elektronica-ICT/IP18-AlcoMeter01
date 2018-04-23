@@ -67,8 +67,8 @@
             "cordova-plugin-splashscreen": {},
             "cordova-plugin-ionic-webview": {},
             "cordova-plugin-ionic-keyboard": {},
-            "cordova-plugin-bluetooth-serial": {},
-            "call-number": {}
+            "call-number": {},
+            "cordova-plugin-bluetooth-serial": {}
         },
         "platforms": [
             "android"

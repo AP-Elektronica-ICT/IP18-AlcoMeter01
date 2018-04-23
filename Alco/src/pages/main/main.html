@@ -1,17 +1,28 @@
 <ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Main</ion-title>
-  </ion-navbar>
-</ion-header>
-
-<ion-content padding>
-<button ion-button full round (click)="onButtonClick()">Click</button>
-<ion-label *ngIf="meting">{{meting}}</ion-label>
-<canvas id='donutChart'></canvas>
-
-  <button (click)='Emergency()' ion-button>Emergency Call</button>
-
-</ion-content>
+    <ion-navbar>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Main</ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content padding>
+  
+  <canvas id='donutChart'></canvas>
+  
+  <button ion-button full round (click)="onButtonClick()" >Measure!</button>
+  
+  <ion-card>
+    
+    <ion-card-content *ngIf="meting">
+        <ion-icon name="wine"></ion-icon>
+      {{meting}}
+    </ion-card-content>
+  </ion-card>
+  
+  <div class="bar bar-footer bar-balanced">
+    <button (click)='Emergency()' ion-button>Emergency Call</button>
+  
+  </div>
+  </ion-content>
