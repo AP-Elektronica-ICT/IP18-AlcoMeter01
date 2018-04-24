@@ -26,14 +26,27 @@ export class MainPage {
   resultaat  = [];
   donutChart:any;
   total: number = 1.5;
-  maxPromille: number = 0.5;
-  emergency: string /*= this.navParams.get('')*/;
+  maxPromille: number = 0.0;
+  emergency: any;
+  private country:any;
 
   constructor(public alertCtrl: AlertController, private menuCtrl: MenuController, public fb: FirebaseProvider,private Noodnummer: CallNumber, public navCtrl: NavController, public navParams: NavParams, public afAuth: AuthenticatieProvider, public bt: BluetoothProvider) {
     this.menuCtrl.enable(true, 'menu');
     /*this.fb.getSettings().then(data => {
       this.emergency.toString =  data.emergencyNumber;
     });*/
+    this.fb.getSettings().then(data => {
+      this.country = data.country;
+      this.emergency= data.emergencyNumber;
+      if( this.country == 'België'){
+        this.maxPromille = 0.5;
+      }
+      if( this.country == 'Finland'){
+        this.maxPromille = 0.5;
+      }
+      console.log(this.emergency);
+      console.log(this.maxPromille);
+    });
     
   }
 
@@ -72,6 +85,7 @@ export class MainPage {
              });
   }
   public Emergency() {
+    
     this.Noodnummer.callNumber(this.emergency, true)
     .then(() => console.log('Launched dialer!'))
     .catch(() => {
