@@ -11,7 +11,7 @@
 <ion-content padding>
 
   <ion-list padding>
-    <button ion-button block (click)="startScanning()">scan</button>
+    <button ion-button block (click)="startScanning()" style="background-color:lightblue;">scan</button>
     <ion-list-header>
       availlable Devices
     </ion-list-header>
@@ -20,7 +20,7 @@
         {{device.name}}
       </span>
     </ion-item>
-    <button ion-button block (click)="disconnect()">Disconnect</button>
+    <button ion-button block (click)="disconnect()" style="background-color:lightblue;">Disconnect</button>
     <ion-list-header>
       Connected Device
     </ion-list-header>
@@ -35,7 +35,7 @@
     <ion-list>
       <ion-item>
         <ion-label floating>Family emergency number</ion-label>
-        <ion-input  type="text" formControlName="emergencyNumber"></ion-input>
+        <ion-input  type="text" formControlName="emergencyNumber" #emergency></ion-input>
       </ion-item>
       
   

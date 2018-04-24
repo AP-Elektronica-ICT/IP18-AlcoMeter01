@@ -9,7 +9,7 @@ webpackJsonp([3],{
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__create_account_create_account__ = __webpack_require__(168);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__reset_password_reset_password__ = __webpack_require__(144);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__main_main__ = __webpack_require__(70);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__main_main__ = __webpack_require__(56);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__simplyMeasure_simplyMeasure__ = __webpack_require__(145);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_authenticatie_authenticatie__ = __webpack_require__(39);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -349,7 +349,7 @@ var SimplyMeasurePage = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_firebase_firebase__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_firebase_firebase__ = __webpack_require__(57);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_authenticatie_authenticatie__ = __webpack_require__(39);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_firebase__ = __webpack_require__(83);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_firebase__);
@@ -512,10 +512,10 @@ var PersonalInfoPage = (function () {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.fb.getUserProfile().then(function (value) {
                             _this.profile = value;
+                            console.log("profile in profilePage: ", _this.profile);
                         })];
                     case 1:
                         _a.sent();
-                        console.log("profile in profilePage: ", this.profile);
                         return [2 /*return*/];
                 }
             });
@@ -558,7 +558,7 @@ function matchOtherValidator(otherControlName) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_authenticatie_authenticatie__ = __webpack_require__(39);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__main_main__ = __webpack_require__(70);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__main_main__ = __webpack_require__(56);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -709,7 +709,8 @@ function matchOtherValidator(otherControlName) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_bluetooth_bluetooth__ = __webpack_require__(93);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_firebase_firebase__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_firebase_firebase__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__main_main__ = __webpack_require__(56);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -759,6 +760,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
+
 var SettingsPage = (function () {
     function SettingsPage(alert, loadingCtrl, formBuilder, bt, navCtrl, navParams, fb) {
         this.alert = alert;
@@ -773,6 +775,7 @@ var SettingsPage = (function () {
             emergencyNumber: ['', __WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].compose([__WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].pattern('[0-9]*'), __WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].required])],
             country: ['', __WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].required]
         });
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_5__main_main__["a" /* MainPage */], this.settingsForm.value.emergencyNumber);
         this.getSettings();
     }
     SettingsPage.prototype.save = function () {
@@ -844,7 +847,7 @@ var SettingsPage = (function () {
     };
     SettingsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-settings',template:/*ion-inline-start:"C:\Users\ajons\Desktop\Projecten\IP18-AlcoMeter01\Alco\src\pages\settings\settings.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>Settings</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n  <ion-list padding>\n\n    <button ion-button block (click)="startScanning()">scan</button>\n\n    <ion-list-header>\n\n      availlable Devices\n\n    </ion-list-header>\n\n    <ion-item *ngFor=\'let device of availableDevices\'>\n\n      <span (click)="selectDevice(device)">\n\n        {{device.name}}\n\n      </span>\n\n    </ion-item>\n\n    <button ion-button block (click)="disconnect()">Disconnect</button>\n\n    <ion-list-header>\n\n      Connected Device\n\n    </ion-list-header>\n\n    <ion-item *ngIf="connectedDevice">\n\n      {{connectedDevice.name}}\n\n    </ion-item>\n\n    <ion-spinner name="crescent" *ngIf="scanning"></ion-spinner>\n\n    \n\n  \n\n  \n\n  <form [formGroup]="settingsForm" (submit)="save()">\n\n    <ion-list>\n\n      <ion-item>\n\n        <ion-label floating>Family emergency number</ion-label>\n\n        <ion-input  type="text" formControlName="emergencyNumber"></ion-input>\n\n      </ion-item>\n\n      \n\n  \n\n      <ion-item>\n\n        <ion-label>Current country</ion-label>\n\n        <ion-select formControlName="country">\n\n          <ion-option value="België">België</ion-option>\n\n          <ion-option value="Finland">Finland</ion-option>\n\n        </ion-select>\n\n      </ion-item>\n\n    \n\n    \n\n      <button type="submit"  style=" background-color:lightblue; width:100%" ion-button [disabled]="!settingsForm.valid">Save</button>\n\n      </ion-list>\n\n    </form>\n\n  </ion-list>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\ajons\Desktop\Projecten\IP18-AlcoMeter01\Alco\src\pages\settings\settings.html"*/,
+            selector: 'page-settings',template:/*ion-inline-start:"C:\Users\ajons\Desktop\Projecten\IP18-AlcoMeter01\Alco\src\pages\settings\settings.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>Settings</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n  <ion-list padding>\n\n    <button ion-button block (click)="startScanning()">scan</button>\n\n    <ion-list-header>\n\n      availlable Devices\n\n    </ion-list-header>\n\n    <ion-item *ngFor=\'let device of availableDevices\'>\n\n      <span (click)="selectDevice(device)">\n\n        {{device.name}}\n\n      </span>\n\n    </ion-item>\n\n    <button ion-button block (click)="disconnect()">Disconnect</button>\n\n    <ion-list-header>\n\n      Connected Device\n\n    </ion-list-header>\n\n    <ion-item *ngIf="connectedDevice">\n\n      {{connectedDevice.name}}\n\n    </ion-item>\n\n    <ion-spinner name="crescent" *ngIf="scanning"></ion-spinner>\n\n    \n\n  \n\n  \n\n  <form [formGroup]="settingsForm" (submit)="save()">\n\n    <ion-list>\n\n      <ion-item>\n\n        <ion-label floating>Family emergency number</ion-label>\n\n        <ion-input  type="text" formControlName="emergencyNumber" #emergency></ion-input>\n\n      </ion-item>\n\n      \n\n  \n\n      <ion-item>\n\n        <ion-label>Current country</ion-label>\n\n        <ion-select formControlName="country">\n\n          <ion-option value="België">België</ion-option>\n\n          <ion-option value="Finland">Finland</ion-option>\n\n        </ion-select>\n\n      </ion-item>\n\n    \n\n    \n\n      <button type="submit"  style=" background-color:lightblue; width:100%" ion-button [disabled]="!settingsForm.valid">Save</button>\n\n      </ion-list>\n\n    </form>\n\n  </ion-list>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\ajons\Desktop\Projecten\IP18-AlcoMeter01\Alco\src\pages\settings\settings.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */], __WEBPACK_IMPORTED_MODULE_2__providers_bluetooth_bluetooth__["a" /* BluetoothProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */], __WEBPACK_IMPORTED_MODULE_4__providers_firebase_firebase__["a" /* FirebaseProvider */]])
     ], SettingsPage);
@@ -864,7 +867,7 @@ var SettingsPage = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_chart_js__ = __webpack_require__(142);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_chart_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_chart_js__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_firebase_firebase__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_firebase_firebase__ = __webpack_require__(57);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1044,17 +1047,17 @@ var map = {
 		421
 	],
 	"../pages/personal-info/personal-info.module": [
-		424
+		422
 	],
 	"../pages/reset-password/reset-password.module": [
-		422
+		423
 	],
 	"../pages/settings/settings.module": [
 		705,
 		1
 	],
 	"../pages/simplyMeasure/simplyMeasure.module": [
-		423
+		424
 	],
 	"../pages/statistics/statistics.module": [
 		706,
@@ -1232,7 +1235,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MainPageModule", function() { return MainPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__main__ = __webpack_require__(70);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__main__ = __webpack_require__(56);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1263,82 +1266,6 @@ var MainPageModule = (function () {
 /***/ }),
 
 /***/ 422:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ResetPasswordPageModule", function() { return ResetPasswordPageModule; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__reset_password__ = __webpack_require__(144);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-
-
-
-var ResetPasswordPageModule = (function () {
-    function ResetPasswordPageModule() {
-    }
-    ResetPasswordPageModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
-            declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__reset_password__["a" /* ResetPasswordPage */],
-            ],
-            imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__reset_password__["a" /* ResetPasswordPage */]),
-            ],
-        })
-    ], ResetPasswordPageModule);
-    return ResetPasswordPageModule;
-}());
-
-//# sourceMappingURL=reset-password.module.js.map
-
-/***/ }),
-
-/***/ 423:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SimplyMeasurePageModule", function() { return SimplyMeasurePageModule; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__simplyMeasure__ = __webpack_require__(145);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-
-
-
-var SimplyMeasurePageModule = (function () {
-    function SimplyMeasurePageModule() {
-    }
-    SimplyMeasurePageModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
-            declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__simplyMeasure__["a" /* SimplyMeasurePage */],
-            ],
-            imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__simplyMeasure__["a" /* SimplyMeasurePage */]),
-            ],
-        })
-    ], SimplyMeasurePageModule);
-    return SimplyMeasurePageModule;
-}());
-
-//# sourceMappingURL=simplyMeasure.module.js.map
-
-/***/ }),
-
-/***/ 424:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1376,6 +1303,82 @@ var PersonalInfoPageModule = (function () {
 
 /***/ }),
 
+/***/ 423:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ResetPasswordPageModule", function() { return ResetPasswordPageModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__reset_password__ = __webpack_require__(144);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+var ResetPasswordPageModule = (function () {
+    function ResetPasswordPageModule() {
+    }
+    ResetPasswordPageModule = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
+            declarations: [
+                __WEBPACK_IMPORTED_MODULE_2__reset_password__["a" /* ResetPasswordPage */],
+            ],
+            imports: [
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__reset_password__["a" /* ResetPasswordPage */]),
+            ],
+        })
+    ], ResetPasswordPageModule);
+    return ResetPasswordPageModule;
+}());
+
+//# sourceMappingURL=reset-password.module.js.map
+
+/***/ }),
+
+/***/ 424:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SimplyMeasurePageModule", function() { return SimplyMeasurePageModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__simplyMeasure__ = __webpack_require__(145);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+var SimplyMeasurePageModule = (function () {
+    function SimplyMeasurePageModule() {
+    }
+    SimplyMeasurePageModule = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
+            declarations: [
+                __WEBPACK_IMPORTED_MODULE_2__simplyMeasure__["a" /* SimplyMeasurePage */],
+            ],
+            imports: [
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__simplyMeasure__["a" /* SimplyMeasurePage */]),
+            ],
+        })
+    ], SimplyMeasurePageModule);
+    return SimplyMeasurePageModule;
+}());
+
+//# sourceMappingURL=simplyMeasure.module.js.map
+
+/***/ }),
+
 /***/ 466:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1405,7 +1408,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_status_bar__ = __webpack_require__(464);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__angular_http__ = __webpack_require__(703);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_angularfire2_database__ = __webpack_require__(277);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__providers_firebase_firebase__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__providers_firebase_firebase__ = __webpack_require__(57);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__ionic_native_splash_screen__ = __webpack_require__(465);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_angularfire2__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_angularfire2_auth__ = __webpack_require__(268);
@@ -1414,18 +1417,18 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_create_account_create_account__ = __webpack_require__(168);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__providers_authenticatie_authenticatie__ = __webpack_require__(39);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__pages_simplyMeasure_simplyMeasure__ = __webpack_require__(145);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_simplyMeasure_simplyMeasure_module__ = __webpack_require__(423);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_simplyMeasure_simplyMeasure_module__ = __webpack_require__(424);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20_firebase__ = __webpack_require__(83);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_20_firebase__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__pages_reset_password_reset_password_module__ = __webpack_require__(422);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__pages_reset_password_reset_password_module__ = __webpack_require__(423);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__pages_reset_password_reset_password__ = __webpack_require__(144);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__pages_main_main__ = __webpack_require__(70);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__pages_main_main__ = __webpack_require__(56);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__pages_settings_settings__ = __webpack_require__(169);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__pages_statistics_statistics__ = __webpack_require__(170);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__pages_personal_info_personal_info__ = __webpack_require__(146);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__providers_bluetooth_bluetooth__ = __webpack_require__(93);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__pages_main_main_module__ = __webpack_require__(421);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__pages_personal_info_personal_info_module__ = __webpack_require__(424);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__pages_personal_info_personal_info_module__ = __webpack_require__(422);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1492,10 +1495,10 @@ var AppModule = (function () {
                         { loadChildren: '../pages/create-account/create-account.module#CreateAccountPageModule', name: 'page-create-account', segment: 'create-account', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/main/main.module#MainPageModule', name: 'MainPage', segment: 'main', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/reset-password/reset-password.module#ResetPasswordPageModule', name: 'page-reset-password', segment: 'reset-password', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/settings/settings.module#SettingsPageModule', name: 'SettingsPage', segment: 'settings', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/simplyMeasure/simplyMeasure.module#SimplyMeasurePageModule', name: 'SimplyMeasurePage', segment: 'simplyMeasure', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/personal-info/personal-info.module#PersonalInfoPageModule', name: 'PersonalInfoPage', segment: 'personal-info', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/settings/settings.module#SettingsPageModule', name: 'SettingsPage', segment: 'settings', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/reset-password/reset-password.module#ResetPasswordPageModule', name: 'page-reset-password', segment: 'reset-password', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/simplyMeasure/simplyMeasure.module#SimplyMeasurePageModule', name: 'SimplyMeasurePage', segment: 'simplyMeasure', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/statistics/statistics.module#StatisticsPageModule', name: 'StatisticsPage', segment: 'statistics', priority: 'low', defaultHistory: [] }
                     ]
                 }),
@@ -1542,6 +1545,128 @@ var AppModule = (function () {
 /***/ }),
 
 /***/ 56:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MainPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_authenticatie_authenticatie__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_firebase_firebase__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_bluetooth_bluetooth__ = __webpack_require__(93);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_chart_js__ = __webpack_require__(142);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_chart_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_chart_js__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_call_number__ = __webpack_require__(419);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+/**
+ * Generated class for the MainPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+var MainPage = (function () {
+    function MainPage(alertCtrl, menuCtrl, fb, Noodnummer, navCtrl, navParams, afAuth, bt) {
+        var _this = this;
+        this.alertCtrl = alertCtrl;
+        this.menuCtrl = menuCtrl;
+        this.fb = fb;
+        this.Noodnummer = Noodnummer;
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.afAuth = afAuth;
+        this.bt = bt;
+        this.beschrijving = "Een lekkere mojito!";
+        this.resultaat = [];
+        this.total = 2;
+        this.maxPromille = 0.5;
+        this.buttonClicked = false; //Whatever you want to initialise it as
+        this.menuCtrl.enable(true, 'menu');
+        this.fb.getSettings().then(function (data) {
+            _this.emergency.toString = data.emergencyNumber;
+        });
+    }
+    MainPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad MainPage');
+    };
+    MainPage.prototype.onButtonClick = function () {
+        //this.receiveData();
+        this.meting = 1.0;
+        this.resultaat = [this.meting, this.beschrijving];
+        this.fb.saveMeasurement(this.resultaat);
+        this.donutChart = new __WEBPACK_IMPORTED_MODULE_5_chart_js__["Chart"](document.getElementById('donutChart'), {
+            type: 'doughnut',
+            data: {
+                labels: [this.label()],
+                datasets: [{
+                        label: '# alcohol promille',
+                        data: [this.meting, this.total - this.meting],
+                        backgroundColor: [
+                            this.color(),
+                            'rgb(255, 206, 86)'
+                        ]
+                    }]
+            }
+        });
+    };
+    MainPage.prototype.Emergency = function () {
+        var _this = this;
+        this.Noodnummer.callNumber(this.emergency, true)
+            .then(function () { return console.log('Launched dialer!'); })
+            .catch(function () {
+            console.log('Error launching dialer');
+            console.log(_this.emergency);
+            var alert = _this.alertCtrl.create({
+                message: 'Error launching dialer',
+                buttons: [{ text: 'Ok', role: 'cancel' }]
+            });
+            alert.present();
+        });
+    };
+    MainPage.prototype.receiveData = function () {
+        this.bt.receiveData();
+        this.meting = this.bt.meting;
+    };
+    MainPage.prototype.color = function () {
+        if (this.meting < this.maxPromille)
+            return 'rgb(75, 192, 192)';
+        else
+            return 'rgb(255, 99, 132)';
+    };
+    MainPage.prototype.label = function () {
+        if (this.meting < this.maxPromille)
+            return "Drive";
+        else
+            return 'No drive';
+    };
+    MainPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-main',template:/*ion-inline-start:"C:\Users\ajons\Desktop\Projecten\IP18-AlcoMeter01\Alco\src\pages\main\main.html"*/'<ion-header>\n\n    <ion-navbar>\n\n      <button ion-button menuToggle>\n\n        <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n      <ion-title>Main</ion-title>\n\n    </ion-navbar>\n\n  </ion-header>\n\n  \n\n  <ion-content padding>\n\n  \n\n  <canvas id=\'donutChart\'></canvas>\n\n  \n\n  <button ion-button full round (click)="onButtonClick()" >Measure!</button>\n\n  \n\n  <ion-card>\n\n    \n\n    <ion-card-content *ngIf="meting">\n\n        <ion-icon name="wine"></ion-icon>\n\n      {{meting}}\n\n    </ion-card-content>\n\n  </ion-card>\n\n  \n\n  <div class="bar bar-footer bar-balanced">\n\n    <button (click)=\'Emergency()\' ion-button>Emergency Call</button>\n\n  \n\n  </div>\n\n  </ion-content>'/*ion-inline-end:"C:\Users\ajons\Desktop\Projecten\IP18-AlcoMeter01\Alco\src\pages\main\main.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* MenuController */], __WEBPACK_IMPORTED_MODULE_3__providers_firebase_firebase__["a" /* FirebaseProvider */], __WEBPACK_IMPORTED_MODULE_6__ionic_native_call_number__["a" /* CallNumber */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_authenticatie_authenticatie__["a" /* AuthenticatieProvider */], __WEBPACK_IMPORTED_MODULE_4__providers_bluetooth_bluetooth__["a" /* BluetoothProvider */]])
+    ], MainPage);
+    return MainPage;
+}());
+
+//# sourceMappingURL=main.js.map
+
+/***/ }),
+
+/***/ 57:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1678,7 +1803,7 @@ var FirebaseProvider = (function () {
                         arr = [];
                         settings = {
                             "country": String,
-                            "emergencyNumber": Date
+                            "emergencyNumber": String
                         };
                         return [4 /*yield*/, this.auth.getCurrentuserID().then(function (id) {
                                 console.log("userId in firebaseProvider: ", id);
@@ -2028,123 +2153,6 @@ webpackContext.id = 665;
 
 /***/ }),
 
-/***/ 70:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MainPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_authenticatie_authenticatie__ = __webpack_require__(39);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_firebase_firebase__ = __webpack_require__(56);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_bluetooth_bluetooth__ = __webpack_require__(93);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_chart_js__ = __webpack_require__(142);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_chart_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_chart_js__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_call_number__ = __webpack_require__(419);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-
-
-/**
- * Generated class for the MainPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-var MainPage = (function () {
-    function MainPage(alertCtrl, menuCtrl, fb, Noodnummer, navCtrl, navParams, afAuth, bt) {
-        this.alertCtrl = alertCtrl;
-        this.menuCtrl = menuCtrl;
-        this.fb = fb;
-        this.Noodnummer = Noodnummer;
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.afAuth = afAuth;
-        this.bt = bt;
-        this.beschrijving = "Een lekkere mojito!";
-        this.resultaat = [];
-        this.total = 2;
-        this.maxPromille = 0.5;
-        this.buttonClicked = false; //Whatever you want to initialise it as
-        this.menuCtrl.enable(true, 'menu');
-    }
-    MainPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad MainPage');
-    };
-    MainPage.prototype.onButtonClick = function () {
-        //this.receiveData();
-        this.meting = 1.12;
-        this.resultaat = [this.meting, this.beschrijving];
-        this.fb.saveMeasurement(this.resultaat);
-        this.donutChart = new __WEBPACK_IMPORTED_MODULE_5_chart_js__["Chart"](document.getElementById('donutChart'), {
-            type: 'doughnut',
-            data: {
-                labels: [this.label()],
-                datasets: [{
-                        label: '# alcohol promille',
-                        data: [this.meting, this.total - this.meting],
-                        backgroundColor: [
-                            this.color(),
-                            'rgb(255, 206, 86)'
-                        ]
-                    }]
-            }
-        });
-    };
-    MainPage.prototype.Emergency = function () {
-        var _this = this;
-        this.Noodnummer.callNumber("0495142810", true)
-            .then(function () { return console.log('Launched dialer!'); })
-            .catch(function () {
-            console.log('Error launching dialer');
-            var alert = _this.alertCtrl.create({
-                message: 'Error launching dialer',
-                buttons: [{ text: 'Ok', role: 'cancel' }]
-            });
-            alert.present();
-        });
-    };
-    MainPage.prototype.receiveData = function () {
-        this.bt.receiveData();
-        this.meting = this.bt.meting;
-    };
-    MainPage.prototype.color = function () {
-        if (this.meting < this.maxPromille)
-            return 'rgb(75, 192, 192)';
-        else
-            return 'rgb(255, 99, 132)';
-    };
-    MainPage.prototype.label = function () {
-        if (this.meting < this.maxPromille)
-            return "Drive";
-        else
-            return 'No drive';
-    };
-    MainPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-main',template:/*ion-inline-start:"C:\Users\ajons\Desktop\Projecten\IP18-AlcoMeter01\Alco\src\pages\main\main.html"*/'<ion-header>\n\n    <ion-navbar>\n\n      <button ion-button menuToggle>\n\n        <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n      <ion-title>Main</ion-title>\n\n    </ion-navbar>\n\n  </ion-header>\n\n  \n\n  <ion-content padding>\n\n  \n\n  <canvas id=\'donutChart\'></canvas>\n\n  \n\n  <button ion-button full round (click)="onButtonClick()" >Measure!</button>\n\n  \n\n  <ion-card>\n\n    \n\n    <ion-card-content *ngIf="meting">\n\n        <ion-icon name="wine"></ion-icon>\n\n      {{meting}}\n\n    </ion-card-content>\n\n  </ion-card>\n\n  \n\n  <div class="bar bar-footer bar-balanced">\n\n    <button (click)=\'Emergency()\' ion-button>Emergency Call</button>\n\n  \n\n  </div>\n\n  </ion-content>'/*ion-inline-end:"C:\Users\ajons\Desktop\Projecten\IP18-AlcoMeter01\Alco\src\pages\main\main.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* MenuController */], __WEBPACK_IMPORTED_MODULE_3__providers_firebase_firebase__["a" /* FirebaseProvider */], __WEBPACK_IMPORTED_MODULE_6__ionic_native_call_number__["a" /* CallNumber */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_authenticatie_authenticatie__["a" /* AuthenticatieProvider */], __WEBPACK_IMPORTED_MODULE_4__providers_bluetooth_bluetooth__["a" /* BluetoothProvider */]])
-    ], MainPage);
-    return MainPage;
-}());
-
-//# sourceMappingURL=main.js.map
-
-/***/ }),
-
 /***/ 702:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2157,11 +2165,11 @@ var MainPage = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_firebase__ = __webpack_require__(83);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_firebase__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_login_login__ = __webpack_require__(143);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_main_main__ = __webpack_require__(70);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_main_main__ = __webpack_require__(56);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_settings_settings__ = __webpack_require__(169);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_statistics_statistics__ = __webpack_require__(170);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_personal_info_personal_info__ = __webpack_require__(146);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__providers_firebase_firebase__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__providers_firebase_firebase__ = __webpack_require__(57);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__providers_authenticatie_authenticatie__ = __webpack_require__(39);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;

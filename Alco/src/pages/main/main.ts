@@ -26,9 +26,13 @@ export class MainPage {
   donutChart:any;
   total: number = 2;
   maxPromille: number = 0.5;
+  emergency: string /*= this.navParams.get('')*/;
 
   constructor(public alertCtrl: AlertController, private menuCtrl: MenuController, public fb: FirebaseProvider,private Noodnummer: CallNumber, public navCtrl: NavController, public navParams: NavParams, public afAuth: AuthenticatieProvider, public bt: BluetoothProvider) {
     this.menuCtrl.enable(true, 'menu');
+    /*this.fb.getSettings().then(data => {
+      this.emergency.toString =  data.emergencyNumber;
+    });*/
   }
 
   ionViewDidLoad() {
@@ -42,7 +46,7 @@ export class MainPage {
   public onButtonClick() {
 
     //this.receiveData();
-    this.meting = 1.12;
+    this.meting = 1.0;
     this.resultaat= [this.meting, this.beschrijving];
     this.fb.saveMeasurement(this.resultaat);
     
@@ -66,10 +70,12 @@ export class MainPage {
              });
   }
   public Emergency() {
-    this.Noodnummer.callNumber("0495142810", true)
+    this.Noodnummer.callNumber(this.emergency, true)
     .then(() => console.log('Launched dialer!'))
     .catch(() => {
       console.log('Error launching dialer')
+      console.log(this.emergency)
+
       const alert = this.alertCtrl.create({
         message: 'Error launching dialer',
         buttons: [{text: 'Ok', role: 'cancel'}]

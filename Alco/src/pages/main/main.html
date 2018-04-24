@@ -11,8 +11,8 @@
   
   <canvas id='donutChart'></canvas>
   
-  <button ion-button full round (click)="onButtonClick()" >Measure!</button>
-  
+  <button ion-button full round (click)="onButtonClick()" style="width:300px; height:100px; margin-left:5%; background-color:lightblue;" >Measure!</button>
+
   <ion-card>
     
     <ion-card-content *ngIf="meting">
@@ -22,7 +22,7 @@
   </ion-card>
   
   <div class="bar bar-footer bar-balanced">
-    <button (click)='Emergency()' ion-button>Emergency Call</button>
+    <button (click)='Emergency()' style="background-color:lightblue;" ion-button>Emergency Call</button>
   
   </div>
   </ion-content>

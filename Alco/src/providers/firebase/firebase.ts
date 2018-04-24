@@ -68,7 +68,7 @@ export class FirebaseProvider {
     var arr = [];
     var settings = {
       "country": String,
-      "emergencyNumber": Date
+      "emergencyNumber":String
     }
     
     await this.auth.getCurrentuserID().then( id => {

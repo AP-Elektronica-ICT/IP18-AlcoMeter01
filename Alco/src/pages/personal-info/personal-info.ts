@@ -108,11 +108,13 @@ export class PersonalInfoPage {
     alert.present();
   }
 
-  async getProfile(){
+  async getProfile(){ 
     await this.fb.getUserProfile().then(value => {
       this.profile = value;
+
+      console.log("profile in profilePage: ", this.profile);
+
     });
-    console.log("profile in profilePage: ", this.profile);
   }
 }
 

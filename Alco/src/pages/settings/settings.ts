@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams,Loading, LoadingController, AlertCo
 import { BluetoothProvider } from '../../providers/bluetooth/bluetooth';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FirebaseProvider} from '../../providers/firebase/firebase'
+import { MainPage } from '../main/main';
 
 
 @IonicPage()
@@ -16,6 +17,8 @@ export class SettingsPage {
   public connectedDevice: any;
   public availableDevices: any[] = [];
   public settings: any;
+  public emergencyNumber: string;
+  
   
 
   constructor(private alert: AlertController,private loadingCtrl: LoadingController, private formBuilder: FormBuilder, public bt: BluetoothProvider, public navCtrl: NavController, public navParams: NavParams, private fb: FirebaseProvider) {
@@ -23,9 +26,8 @@ export class SettingsPage {
       emergencyNumber:['', Validators.compose([Validators.pattern('[0-9]*'), Validators.required])],
       country:['', Validators.required]
     });
-    
+    this.navCtrl.push(MainPage, this.settingsForm.value.emergencyNumber);
     this.getSettings();
-    
     
   }
 
@@ -49,6 +51,7 @@ export class SettingsPage {
       alert.present();
     }
   }
+  
 
   startScanning(){
     this.bt.startScanning();
@@ -74,6 +77,7 @@ export class SettingsPage {
     });
     console.log("settings in settingspage: ", this.settings);
   }
+  
 
 }
 
