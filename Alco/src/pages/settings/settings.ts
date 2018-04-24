@@ -28,12 +28,8 @@ export class SettingsPage {
       emergencyNumber:['', Validators.compose([Validators.pattern('[0-9]*'), Validators.required])],
       country:['', Validators.required]
     });
-<<<<<<< HEAD
    // this.navCtrl.push(MainPage, this.settingsForm.value.emergencyNumber);
     this.getSettings();
-=======
-    //this.getSettings();
->>>>>>> d8203d466030fa91d72ebdd692b3f191798c7eb1
     
   }
 

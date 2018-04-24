@@ -3,11 +3,7 @@
     <name>Alcometer</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
-<<<<<<< HEAD
     <content src="index.html" />
-=======
-    <content original-src="index.html" src="http://192.168.0.185:8100" />
->>>>>>> d8203d466030fa91d72ebdd692b3f191798c7eb1
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />

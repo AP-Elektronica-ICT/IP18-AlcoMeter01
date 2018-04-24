@@ -21,7 +21,7 @@ import * as math from 'mathjs';
 })
 export class MainPage {
 
-
+  public drink: String;
   public meting: any;
   public beschrijving:String = "Een lekkere mojito!";
   resultaat  = [];
@@ -50,6 +50,8 @@ export class MainPage {
     });
     
   }
+
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad MainPage');
