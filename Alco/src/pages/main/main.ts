@@ -5,7 +5,7 @@ import { FirebaseProvider } from '../../providers/firebase/firebase';
 import { BluetoothProvider } from '../../providers/bluetooth/bluetooth';
 import { Chart } from 'chart.js';
 import { CallNumber } from '@ionic-native/call-number';
-
+import * as math from 'mathjs';
 /**
  * Generated class for the MainPage page.
  *
@@ -20,11 +20,12 @@ import { CallNumber } from '@ionic-native/call-number';
 })
 export class MainPage {
 
-  public meting: number;
+
+  public meting: any;
   public beschrijving:String = "Een lekkere mojito!";
   resultaat  = [];
   donutChart:any;
-  total: number = 2;
+  total: number = 1.5;
   maxPromille: number = 0.5;
   emergency: string /*= this.navParams.get('')*/;
 
@@ -33,6 +34,7 @@ export class MainPage {
     /*this.fb.getSettings().then(data => {
       this.emergency.toString =  data.emergencyNumber;
     });*/
+    
   }
 
   ionViewDidLoad() {
@@ -44,9 +46,9 @@ export class MainPage {
   public buttonClicked: boolean = false; //Whatever you want to initialise it as
 
   public onButtonClick() {
-
+    
     //this.receiveData();
-    this.meting = 1.0;
+    this.meting = math.round(math.random(0, 1.5),2);
     this.resultaat= [this.meting, this.beschrijving];
     this.fb.saveMeasurement(this.resultaat);
     
