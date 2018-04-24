@@ -113,7 +113,7 @@ export class BluetoothProvider {
     }
   
    public receiveData(){
-    this.bluetoothSerial.readUntil(";").then(data => { console.log(this.meting);this.meting = data; });
+    this.bluetoothSerial.readUntil(";").then(data => { this.bluetoothSerial.subscribe(";"); this.meting = data; console.log(this.meting);});
   }
 }
 
