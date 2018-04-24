@@ -70,7 +70,7 @@ export class MainPage {
              });
   }
   public Emergency() {
-    this.Noodnummer.callNumber(this.emergency, true)
+    this.Noodnummer.callNumber('0495142810', true)
     .then(() => console.log('Launched dialer!'))
     .catch(() => {
       console.log('Error launching dialer')

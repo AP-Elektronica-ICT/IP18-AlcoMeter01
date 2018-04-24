@@ -26,7 +26,7 @@ export class SettingsPage {
       emergencyNumber:['', Validators.compose([Validators.pattern('[0-9]*'), Validators.required])],
       country:['', Validators.required]
     });
-    this.navCtrl.push(MainPage, this.settingsForm.value.emergencyNumber);
+   // this.navCtrl.push(MainPage, this.settingsForm.value.emergencyNumber);
     this.getSettings();
     
   }
