@@ -22,7 +22,7 @@ import * as math from 'mathjs';
 export class MainPage {
 
 
-  public meting: number;
+  public meting: any;
   public beschrijving:String = "Een lekkere mojito!";
   resultaat  = [];
   donutChart:any;
@@ -60,9 +60,14 @@ export class MainPage {
   public buttonClicked: boolean = false; //Whatever you want to initialise it as
 
   public onButtonClick() {
-    
-    this.receiveData()
-    //this.meting = math.round(math.random(0, 1.5),2);
+   /* this.bluetoothSerial.write('2').then(success => {
+      console.log(success);
+    }, failed => {
+      console.log(failed);
+    });*/
+
+    //this.receiveData()
+    this.meting = math.round(math.random(0, 1.5),2);
 
     
     this.donutChart = new Chart(document.getElementById('donutChart'), {
@@ -105,7 +110,8 @@ export class MainPage {
       this.bluetoothSerial.readUntil("f").then(data => { 
         console.log(data); 
         this.meting = Number(data.substring(0, (data.length-1))); 
-        console.log(this.meting); this.bluetoothSerial.clear();    
+        console.log(this.meting);
+        this.bluetoothSerial.clear();    
         this.resultaat= [this.meting, this.beschrijving];
         this.fb.saveMeasurement(this.resultaat);
       });
