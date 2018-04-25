@@ -31,13 +31,13 @@ export class StatisticsPage {
   
   async showChart(loading: Loading){
     var promille = [];
-    var beschrijving = [];
+    var drink = [];
 
     await this.fb.getMeasurements().then(meting => {
 
       meting.forEach(element => {
         promille.push(element.promille);
-        beschrijving.push(element.beschrijving);
+        drink.push(element.drink);
       });
       console.log(promille);
     }).then(() => {
@@ -46,7 +46,7 @@ export class StatisticsPage {
   
         type: 'line',
         data: {
-            labels:beschrijving,
+            labels:drink,
             datasets: [
                 {
                     label: "Alcohol promille",
