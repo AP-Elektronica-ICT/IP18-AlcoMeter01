@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { AuthenticatieProvider} from '../../providers/authenticatie/authenticatie';
 import { BluetoothProvider} from '../../providers/bluetooth/bluetooth';
 import { Chart } from 'chart.js';
+import math from 'mathjs';
 
 /**
  * Generated class for the TestHomePage page.
@@ -19,7 +20,7 @@ import { Chart } from 'chart.js';
 })
 export class SimplyMeasurePage {
 
-  public meting: number;
+  public meting: any;
   public beschrijving:String = "Een lekkere mojito!";
   resultaat  = [];
   donutChart:any;
@@ -39,7 +40,7 @@ export class SimplyMeasurePage {
    public onButtonClick() {
 
     //this.receiveData();
-    this.meting = 0.12;
+    this.meting = math.round(math.random(0, 1.5),2);
     this.total = 2;
     this.resultaat= [this.meting, this.beschrijving];
         

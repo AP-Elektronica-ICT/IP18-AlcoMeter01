@@ -27,7 +27,7 @@ export class MainPage {
   resultaat  = [];
   donutChart:any;
   total: number = 1.5;
-  maxPromille: number = 0.0;
+  maxPromille: number = 0.5;
   emergency: any;
   private country:any;
 
@@ -36,6 +36,12 @@ export class MainPage {
     /*this.fb.getSettings().then(data => {
       this.emergency.toString =  data.emergencyNumber;
     });*/
+    this.fb.getSettings();
+    
+  }
+
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad MainPage');
     this.fb.getSettings().then(data => {
       this.country = data.country;
       this.emergency= data.emergencyNumber;
@@ -48,12 +54,6 @@ export class MainPage {
       console.log(this.emergency);
       console.log(this.maxPromille);
     });
-    
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad MainPage');
- 
   }
 
 
@@ -68,7 +68,8 @@ export class MainPage {
 
     //this.receiveData()
     this.meting = math.round(math.random(0, 1.5),2);
-
+    this.resultaat= [this.meting, this.beschrijving];
+    this.fb.saveMeasurement(this.resultaat);
     
     this.donutChart = new Chart(document.getElementById('donutChart'), {
       
@@ -111,9 +112,9 @@ export class MainPage {
         console.log(data); 
         this.meting = Number(data.substring(0, (data.length-1))); 
         console.log(this.meting);
-        this.bluetoothSerial.clear();    
+        this.bluetoothSerial.clear();
         this.resultaat= [this.meting, this.beschrijving];
-        this.fb.saveMeasurement(this.resultaat);
+        this.fb.saveMeasurement(this.resultaat);    
       });
     }
 

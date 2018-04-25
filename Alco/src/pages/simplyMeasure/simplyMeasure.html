@@ -14,11 +14,19 @@
 
 <ion-content padding>
 
-  <button ion-button full round (click)="onButtonClick()">Click</button>
-  <ion-label *ngIf="meting">{{meting}}</ion-label>
+  <button ion-button full round (click)="onButtonClick()" style='background-color: lightblue'>Click</button>
+
   <canvas id='donutChart'></canvas>
 
-  <button ion-button block (click)="startScanning()">scan</button>
+  <ion-card>
+    
+    <ion-card-content *ngIf="meting">
+        <ion-icon name="wine"></ion-icon>
+      {{meting}}
+    </ion-card-content>
+  </ion-card>
+
+  <button ion-button block (click)="startScanning()" style='background-color: lightblue'>scan</button>
     <ion-list-header>
       availlable Devices
     </ion-list-header>
@@ -27,11 +35,6 @@
         {{device.name}}
       </span>
     </ion-item>
-    <button ion-button block (click)="disconnect()">Disconnect</button>
-    <ion-list-header>
-      Connected Device
-    </ion-list-header>
-    <ion-item *ngIf="connectedDevice">
-      {{connectedDevice.name}}
-    </ion-item>
+    <button ion-button block (click)="disconnect()" style='background-color: lightblue'>Disconnect</button>
+
 </ion-content>
