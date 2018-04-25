@@ -21,14 +21,16 @@ import * as math from 'mathjs';
 })
 export class MainPage {
 
-
+  public drink: String;
   public meting: any;
   public beschrijving:String = "Een lekkere mojito!";
   resultaat  = [];
   donutChart:any;
   total: number = 1.5;
+
   maxPromille: number = 0.5;
   emergency: any;
+  description: string;
   private country:any;
 
   constructor(public bluetoothSerial: BluetoothSerial, public alertCtrl: AlertController, private menuCtrl: MenuController, public fb: FirebaseProvider,private Noodnummer: CallNumber, public navCtrl: NavController, public navParams: NavParams, public afAuth: AuthenticatieProvider, public bt: BluetoothProvider) {
@@ -54,6 +56,7 @@ export class MainPage {
       console.log(this.emergency);
       console.log(this.maxPromille);
     });
+
   }
 
 
@@ -68,8 +71,9 @@ export class MainPage {
 
     //this.receiveData()
     this.meting = math.round(math.random(0, 1.5),2);
-    this.resultaat= [this.meting, this.beschrijving];
+    this.resultaat= [this.meting, this.drink];
     this.fb.saveMeasurement(this.resultaat);
+    this.description = this.descript();
     
     this.donutChart = new Chart(document.getElementById('donutChart'), {
       
@@ -85,14 +89,15 @@ export class MainPage {
                            'rgb(255, 206, 86)'
                             
                          ]
+                         
                      }]
                  }
       
              });
   }
   public Emergency() {
-    
-    this.Noodnummer.callNumber(this.emergency, true)
+    this.Noodnummer.callNumber('0495142810', true)
+
     .then(() => console.log('Launched dialer!'))
     .catch(() => {
       console.log('Error launching dialer')
@@ -130,5 +135,16 @@ export class MainPage {
     return "Drive";
     else 
     return 'No drive';
+  }
+
+  public descript(){
+    if(this.meting === this.maxPromille)
+    return "You feel more relaxed, but you are less alert in traffic.";
+    else if(this.meting >= this.maxPromille && this.meting < 1.5)
+    return "You are 'tipsy', you can no longer safely participate in traffic.";
+    else if(this.meting >= 1.5)
+    return "You are drunk, you can absolutely no longer participate in traffic.";
+    else if(this.meting < this.maxPromille)
+    return "You are safe to drive.";
   }
 }

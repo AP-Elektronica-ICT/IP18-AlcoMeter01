@@ -96,10 +96,10 @@ export class FirebaseProvider {
   saveMeasurement(resultaat){
     var data = {
       "promille":Number,
-      "beschrijving":String
+      "drink":String
     }
     data.promille = resultaat[0];
-    data.beschrijving = resultaat[1];
+    data.drink = resultaat[1];
     this.auth.getCurrentuserID().then(id => {
       this.afd.database.ref(`/meting/${id}/`).push(data);
     });  
