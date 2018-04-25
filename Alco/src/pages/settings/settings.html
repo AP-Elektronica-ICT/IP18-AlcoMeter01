@@ -30,12 +30,7 @@
     </ion-item>
     <ion-spinner name="crescent" *ngIf="gettingDevices"></ion-spinner>
     <button ion-button block (click)="disconnect()" style='background-color: lightblue'>Disconnect</button>
-    <button ion-button block (click)="receive()" style='background-color: lightblue'>get message</button>
-    <ion-item *ngIf='message'>
-      <span >
-        {{message}}
-      </span>
-    </ion-item>
+
   </ion-list>
     
   

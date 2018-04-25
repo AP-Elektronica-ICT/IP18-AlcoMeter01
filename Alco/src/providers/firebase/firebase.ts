@@ -3,7 +3,7 @@ import { AngularFireDatabase} from 'angularfire2/database';
 //import { AlertController } from 'ionic-angular';
 import { AuthenticatieProvider } from '../../providers/authenticatie/authenticatie';
 //import { Observable } from 'rxjs/Observable';
-//import firebase from 'firebase';
+import firebase from 'firebase';
 
 @Injectable()
 export class FirebaseProvider {
@@ -100,7 +100,7 @@ export class FirebaseProvider {
     }
     data.promille = resultaat[0];
     data.drink = resultaat[1];
-    this.auth.getCurrentuserID().then(id => {
+      this.auth.getCurrentuserID().then(id => {
       this.afd.database.ref(`/meting/${id}/`).push(data);
     });  
   }

@@ -72,6 +72,7 @@ export class MainPage {
     //this.receiveData()
     this.meting = math.round(math.random(0, 1.5),2);
     this.resultaat= [this.meting, this.drink];
+    console.log(this.resultaat);
     this.fb.saveMeasurement(this.resultaat);
     this.description = this.descript();
     

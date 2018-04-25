@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AuthenticatieProvider} from '../../providers/authenticatie/authenticatie';
-import { BluetoothProvider} from '../../providers/bluetooth/bluetooth';
+import { BluetoothSerial }  from '@ionic-native/bluetooth-serial';
 import { Chart } from 'chart.js';
 import math from 'mathjs';
 
@@ -26,10 +26,11 @@ export class SimplyMeasurePage {
   donutChart:any;
   total: number = 2;
   maxPromille: number = 0.5;
-  public connectedDevice: any;
-  public availableDevices: any[] = [];
+  unpairedDevices: any;
+  pairedDevices: any;
+  gettingDevices: Boolean;
 
-  constructor( public bt: BluetoothProvider, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public alertCtrl:AlertController, public bluetoothSerial: BluetoothSerial, public navCtrl: NavController, public navParams: NavParams) {
 
   }
 
@@ -64,25 +65,93 @@ export class SimplyMeasurePage {
              });
   }
 
-  async startScanning(){
-      this.bt.startScanning();
-      this.availableDevices = this.bt.availableDevices;
+  startScanning() {
     
+    this.pairedDevices = null;
+    this.unpairedDevices = null;
+    this.gettingDevices = true;
+    this.bluetoothSerial.discoverUnpaired().then((success) => {
+      this.unpairedDevices = success;
+      this.gettingDevices = false;
+      success.forEach(element => {
+        // alert(element.name);
+      });
+    },
+      (err) => {
+        console.log(err);
+        const alert = this.alertCtrl.create({
+          message: err + " -> Bluetooth Not Available",
+          buttons: [{text: 'Ok', role: 'cancel'}]
+        });
+        alert.present();
+      });
+
+    this.bluetoothSerial.list().then((success) => {
+      this.pairedDevices = success;
+    },
+      (err) => {
+
+      });
+  }
+  success = (data) => alert(data);
+  fail = (error) => alert(error);
+
+  selectDevice(device: any) {
+
+    let alert = this.alertCtrl.create({
+      title: 'Connect',
+      message: 'Do you want to connect with?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Connect',
+          handler: () => {
+            this.bluetoothSerial.connect(device.address).subscribe(this.success, this.fail);
+          }
+        }
+      ]
+    });
+    alert.present();
+
   }
 
-  disconnect(){
-    this.bt.disconnect();
+  disconnect() {
+    let alert = this.alertCtrl.create({
+      title: 'Disconnect?',
+      message: 'Do you want to Disconnect?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Disconnect',
+          handler: () => {
+            this.bluetoothSerial.disconnect();
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 
-  selectDevice(device){
-    this.bt.selectDevice(device);
-    this.connectedDevice = this.bt.connectedDevice;
-  }
 
-
-  private receiveData(){
-    this.bt.receiveData();
-    this.meting = this.bt.meting;
+  public receiveData(){
+    this.bluetoothSerial.readUntil("f").then(data => { 
+      console.log(data); 
+      this.meting = Number(data.substring(0, (data.length-1))); 
+      console.log(this.meting);
+      this.bluetoothSerial.clear();   
+    });
   }
 
   private color(){

@@ -56,6 +56,7 @@ export class SettingsPage {
   
 
   startScanning() {
+    
     this.pairedDevices = null;
     this.unpairedDevices = null;
     this.gettingDevices = true;
@@ -68,14 +69,19 @@ export class SettingsPage {
     },
       (err) => {
         console.log(err);
-      })
+        const alert = this.alertCtrl.create({
+          message: err + " -> Bluetooth Not Available",
+          buttons: [{text: 'Ok', role: 'cancel'}]
+        });
+        alert.present();
+      });
 
     this.bluetoothSerial.list().then((success) => {
       this.pairedDevices = success;
     },
       (err) => {
 
-      })
+      });
   }
   success = (data) => alert(data);
   fail = (error) => alert(error);
@@ -128,9 +134,6 @@ export class SettingsPage {
     alert.present();
   }
 
-  public receive(){
-    this.bluetoothSerial.readUntil("f").then(data => { console.log(data); this.bluetoothSerial.clear();});
-  }
 
   public sendData(){
     this.bluetoothSerial.write('2').then(success => {
