@@ -30,8 +30,20 @@ export class ResetPasswordPage {
   }
 
   resetPassword(){
-    this.authProvider.resetPassword(this.resetPasswordForm.value.email);
-  
+      this.authProvider.resetPassword(this.resetPasswordForm.value.email).then(() => {
+        const alert = this.alertCtrl.create({
+          message: "email send",
+          buttons: [{ text: 'Ok', role: 'cancel' }]
+        });
+        alert.present();
+      }, (err) => {
+        const alert = this.alertCtrl.create({
+          message: err.message,
+          buttons: [{ text: 'Ok', role: 'cancel' }]
+        });
+        alert.present();
+      });
+
   }
   
 
