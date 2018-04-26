@@ -26,15 +26,26 @@
     </ion-card-content>
   </ion-card>
 
-  <button ion-button block (click)="startScanning()" style='background-color: lightblue'>scan</button>
+  <ion-list padding>
+
+    <button ion-button block (click)="startScanning()" style='background-color: lightblue'>scan</button>
+    <ion-list-header>
+      Paired Devices
+    </ion-list-header>
+    <ion-item *ngFor="let device of pairedDevices">
+      {{device.name}}
+    </ion-item>
     <ion-list-header>
       availlable Devices
     </ion-list-header>
-    <ion-item *ngFor='let device of availableDevices'>
+    <ion-item *ngFor='let device of unpairedDevices'>
       <span (click)="selectDevice(device)">
         {{device.name}}
       </span>
     </ion-item>
+    <ion-spinner name="crescent" *ngIf="gettingDevices"></ion-spinner>
     <button ion-button block (click)="disconnect()" style='background-color: lightblue'>Disconnect</button>
+
+  </ion-list>
 
 </ion-content>

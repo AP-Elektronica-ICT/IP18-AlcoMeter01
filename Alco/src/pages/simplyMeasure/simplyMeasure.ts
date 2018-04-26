@@ -80,7 +80,7 @@ export class SimplyMeasurePage {
       (err) => {
         console.log(err);
         const alert = this.alertCtrl.create({
-          message: err + " -> Bluetooth Not Available",
+          message: err + " -> Bluetooth Not Availlable",
           buttons: [{text: 'Ok', role: 'cancel'}]
         });
         alert.present();
